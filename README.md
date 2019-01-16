@@ -1,124 +1,43 @@
-English | [简体中文](./README.zh-CN.md) | [Русский](./README.ru-RU.md)
+# 记录antdpro和antd的开发心得
+## 请主要关注src/pages/Template/这个路径下的组件
 
-<h1 align="center">Ant Design Pro</h1>
+## 1.DataInteration组件
+		<1>.介绍:使用了antdpro特有的数据交互模式 mock+services+models+页面,关注mock、services、models文件夹下的datainteration.js
+		
+## 2.[DynamicTable组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/DataInteration)
+		<1>.介绍: 使用的是动态的表格渲染，具体到每行每列都是一一配置的，便于掌握复杂情况下的Table组件开发
+		
+## 3.[MergeCell组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/DynamicTable)
+		<1>.介绍: 根据后台数据，动态的合并单元格,注意，这个是针对的没有后台分页的情况(也就是后端一次把所有数据返回的情况)
+		
+## 4.[ModalChildDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/ModalChildDemo)
+		<1>.介绍: 使用在子组件渲染modal的方式，多个modal数据的提交
+		
+## 5.[ModalDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/ModalDemo)
+		<1>.介绍: 使用子组件渲染modal的方式，关注单个modal数据的提交
+		
+## 6.[MoreModalDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/MoreModalDemo)
+		<1>.介绍: 使用在子组件渲染modal的方式，多层modal数据的提交
+		
+## 7.[SelectMoreData组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/SelectMoreData)
+		<1>.介绍: 在select组件中传递多个参数
 
-<div align="center">
+## 8.[SetStateDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/SetStateDemo)
+		<1>.介绍: 用解构的方式来改变state的值，方便，必看！
+		
+## 9.[TablePagination组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/TablePagination)
+		<1>.介绍: 分页组件，但是要后端给出总数total
+		
+## 10.[TableRadio组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/TableRadio)
+		<1>.介绍: 点击每一行，选择一条数据
+		
+## 11.[TableTest组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/TableTest)
+		<1>.介绍: 实现表格的批量编辑，添加，删除功能，必看！
+		
+## 12.[TurnToPage组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/TurnToPage)
+		<1>.介绍: 在model中，使用routerRedux.push跳转，state属性来传递参数，不用显示在地址栏，如果要显示在地址栏，请将state属性改为query属性，接收使用this.props.loaction
 
-An out-of-box UI solution for enterprise applications as a React boilerplate.
-
-[![CircleCI Status](https://circleci.com/gh/ant-design/ant-design-pro.svg?style=svg)](https://circleci.com/gh/ant-design/ant-design-pro/)
-[![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)
-[![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro)
-[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
-[![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-![](https://user-images.githubusercontent.com/8186664/44953195-581e3d80-aec4-11e8-8dcb-54b9db38ec11.png)
-
-</div>
-
-- Preview: http://preview.pro.ant.design
-- Home Page: http://pro.ant.design
-- Documentation: http://pro.ant.design/docs/getting-started
-- ChangeLog: http://pro.ant.design/docs/changelog
-- FAQ: http://pro.ant.design/docs/faq
-- Mirror Site in China: http://ant-design-pro.gitee.io
-
-## 2.0 Released Now! 🎉🎉🎉
-[Announcing Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
-
-## Translation Recruitment :loudspeaker:
-
-We need your help: https://github.com/ant-design/ant-design-pro/issues/120
-
-## Features
-
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
-- :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with simple config
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practices**: Solid workflow to make your code healthy
-- :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
-
-## Templates
-
-```
-- Dashboard
-  - Analytic
-  - Monitor
-  - Workspace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced From
-- List
-  - Standard Table
-  - Standard List
-  - Card List
-  - Search List (Project/Applications/Article)
-- Profile
-  - Simple Profile
-  - Advanced Profile
-- Account
-  - Account Center
-  - Account Settings
-- Result
-  - Success
-  - Failed
-- Exception
-  - 403
-  - 404
-  - 500
-- User
-  - Login
-  - Register
-  - Register Result
-```
-
-## Usage
-
-### Use bash
-
-```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
-$ cd ant-design-pro
-$ npm install
-$ npm start         # visit http://localhost:8000
-```
-
-### Use by docker
-
-```bash
-// dev 
-$ npm run docker:dev
-
-// build 
-$ npm run docker:build
-
-
-// production dev 
-$ npm run docker-prod:dev
-
-// production build 
-$ npm run docker-prod:build
-```
-
-More instructions at [documentation](http://pro.ant.design/docs/getting-started).
-
-## Browsers support
-
-Modern browsers and IE11.
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
-
-## Contributing
-
-Any type of contribution is welcome, here are some examples of how you may contribute to this project:
-
-- Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+## 13.[UploadDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/UploadDemo)
+		<1>.介绍: 使用的antd的上传组件，手动上传并传递参数
+			
+				
