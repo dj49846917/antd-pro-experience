@@ -25,9 +25,11 @@ class Add extends PureComponent {
   }
 
   showMore = () => { // 展示弹框
+    const { form } = this.props;
     this.setState({
       visible: true,
     });
+    form.resetFields();
   }
 
   getInfoForm = (form) => { // 获取子组件的form对象

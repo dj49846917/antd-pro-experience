@@ -128,7 +128,7 @@ class ModalDemo extends PureComponent {
   sure = () => {
     this.childForm.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         const newData = data;
         const param = values;
         param.ClassifyNm = '基本情况';

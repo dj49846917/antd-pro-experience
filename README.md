@@ -11,7 +11,7 @@
 		<1>.介绍: 根据后台数据，动态的合并单元格,注意，这个是针对的没有后台分页的情况(也就是后端一次把所有数据返回的情况)
 		
 ## 4.[ModalChildDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/ModalChildDemo)
-		<1>.介绍: 使用在子组件渲染modal的方式，多个modal数据的提交
+		<1>.介绍: 使用在子组件渲染modal的方式，多个modal数据的提交,解决一个bug,子组件校验失败后，孙组件传过来的值无法赋值上去
 		
 ## 5.[ModalDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/ModalDemo)
 		<1>.介绍: 使用子组件渲染modal的方式，关注单个modal数据的提交
@@ -39,5 +39,8 @@
 
 ## 13.[UploadDemo组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/UploadDemo)
 		<1>.介绍: 使用的antd的上传组件，手动上传并传递参数
+
+## 14.[package组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/package)
+		<1>.介绍: basic文件夹为antd的简单封装，没有改任何内容，其他组件的封装都参考这个文件夹
 			
 				

@@ -86,6 +86,7 @@ export default {
   'menu.template.dynamictable': '动态表格',
   'menu.template.tablepagination': '表格分页',
   'menu.template.setstatedemo': '解构改变state',
+  'menu.template.testselect': '测试下拉组件',
   'menu.home': '首页',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',

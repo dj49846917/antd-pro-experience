@@ -100,6 +100,11 @@ export default [
             name: 'setstatedemo',
             component: './Template/SetStateDemo',
           },
+          {
+            path: '/template/testSelect',
+            name: 'testselect',
+            component: './Template/TestSelect',
+          },
         ]
       },
       // { path: '/', redirect: '/dashboard/analysis' },
