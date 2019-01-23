@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react';
 import { Select, Form } from 'antd';
 
 /**
- * @label: 非必传， 页签的标题
- * @list： 必传， 展示的列表数据
- * @required： 非必传，控制是否校验
- * @width： 非必传，控制组件的宽度
- * @initialValue： 非必传，组件的初始值
- * @field： 必传，组件的输出值
- * @disabled： 非必传，控制下拉框的disable状态
- * @ 该组件的使用，一定要传的参数是固定的userId，因为返回的数据就是固定的name，
+ * @param label: 非必传， 页签的标题 (string)
+ * @param list： 必传， 展示的列表数据 (array)
+ * @param required： 非必传，控制是否校验 (boolean)
+ * @param width： 非必传，控制组件的宽度
+ * @param initialValue： 非必传，组件的初始值
+ * @param field： 必传，组件的输出值 (string)
+ * @param disabled： 非必传，控制下拉框的disable状态
+ * @param titleProp: 必传，展示下拉框的值
+ * @param valueProp: 必传，绑定传出的值
  * 
  */
 
@@ -36,6 +37,8 @@ class RenderSelect extends PureComponent {
       initialValue,
       field,
       disabled,
+      titleProp,
+      valueProp,
       ...rest
     } = this.props;
     console.log(this.props);
@@ -54,7 +57,7 @@ class RenderSelect extends PureComponent {
           <Select style={{width}}>
             {
               list ? list.map(item => (
-                <Option key={item.userId}>{item.name}</Option>
+                <Option key={item[valueProp]}>{item[titleProp]}</Option>
                 )) : null
             }
           </Select>

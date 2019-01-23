@@ -59,6 +59,8 @@ class TestSelect extends PureComponent {
                 label='姓名'
                 field='xm'
                 required
+                titleProp='name'
+                valueProp='userId'
                 // initialValue={data[0].name}
                 width="100%"
               />

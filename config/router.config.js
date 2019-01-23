@@ -105,6 +105,11 @@ export default [
             name: 'testselect',
             component: './Template/TestSelect',
           },
+          {
+            path: '/template/formcheck',
+            name: 'formcheck',
+            component: './Template/FormCheck',
+          },
         ]
       },
       // { path: '/', redirect: '/dashboard/analysis' },

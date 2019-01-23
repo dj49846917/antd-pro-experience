@@ -43,4 +43,9 @@
 ## 14.[package组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/package)
 		<1>.介绍: basic文件夹为antd的简单封装，没有改任何内容，其他组件的封装都参考这个文件夹
 			
+## 15.[FormCheck组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/FormCheck)
+		<1>.介绍: antdesin，Form表单下的自定义校验
+
+## 16.[TableSetData组件](https://github.com/dj49846917/antdpro2Expricence/tree/master/src/pages/Template/TableSetData)
+		<1>.介绍: 在table中有输入框和子弹框，输入子弹框的值带回给table的input赋值
 				
