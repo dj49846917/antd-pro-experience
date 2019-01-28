@@ -88,6 +88,7 @@ export default {
   'menu.template.setstatedemo': '解构改变state',
   'menu.template.testselect': '测试下拉组件',
   'menu.template.formcheck': 'Form表单自定义校验',
+  'menu.template.datepickerdemo': '日期组件',
   'menu.home': '首页',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',

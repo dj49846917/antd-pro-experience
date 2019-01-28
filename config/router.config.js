@@ -110,6 +110,11 @@ export default [
             name: 'formcheck',
             component: './Template/FormCheck',
           },
+          {
+            path: '/template/datepickerdemo',
+            name: 'datepickerdemo',
+            component: './Template/DatePickerDemo',
+          },
         ]
       },
       // { path: '/', redirect: '/dashboard/analysis' },

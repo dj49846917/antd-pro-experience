@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, DatePicker } from 'antd';
 
 /**
  * @param  required: 是否校验，true为校验
@@ -8,7 +8,7 @@ import { Form, Input, Button } from 'antd';
  * 
  */
 
-const formItemLayout = {
+const formItemLayout = { // 布局
   labelCol: {
     xs: { span: 24 },
     sm: { span: 8 },
@@ -18,6 +18,8 @@ const formItemLayout = {
     sm: { span: 10 },
   },
 };
+
+const { RangePicker } = DatePicker;
 
 class FormCheck extends PureComponent {
   submit = () => {
@@ -63,6 +65,15 @@ class FormCheck extends PureComponent {
             <Input placeholder='请输入' type='password' />
           )}
         </Form.Item>
+        <Form.Item
+          label="日期"
+          {...formItemLayout}
+        >
+          {getFieldDecorator('password', {})(
+            <DatePicker />
+          )}
+        </Form.Item>
+
         <Button onClick={this.submit}>提交</Button>
       </Form>
     )
