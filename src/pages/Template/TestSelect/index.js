@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Form, Button, Input, Row, Col } from 'antd';
-import RenderSelect from '@/pages/Template/package/own/RenderSelect';
+import RenderSelect from '@/my-components/own/RenderSelect';
 
 const formItemLayout = {
   labelCol: {

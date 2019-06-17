@@ -27,17 +27,78 @@ export default [
           {
             path: '/template/modaldemo',
             name: 'modaldemo',
-            component: './Template/ModalDemo',
+            // component: './Template/ModalDemo',
+            routes: [
+              {
+                path: '/template/modaldemo',
+                redirect: '/template/modaldemo/modal',
+              },
+              {
+                path: '/template/modaldemo/modal',
+                name: 'modal',
+                component: './Template/ModalDemo',
+              },
+              {
+                path: '/template/modaldemo/moremodaldemo',
+                name: 'moremodaldemo',
+                component: './Template/MoreModalDemo',
+              },
+              {
+                path: '/template/modaldemo/morechildmodal',
+                name: 'childmodal',
+                component: './Template/ModalChildDemo',
+              },
+            ]
           },
           {
-            path: '/template/moremodaldemo',
-            name: 'moremodaldemo',
-            component: './Template/MoreModalDemo',
-          },
-          {
-            path: '/template/mergecell',
-            name: 'mergecell',
-            component: './Template/MergeCell',
+            path: '/template/table',
+            name: 'table',
+            routes: [
+              {
+                path: '/template/table',
+                redirect: '/template/table/mergecell',
+              },
+              {
+                path: '/template/table/mergecell',
+                name: 'mergecell',
+                component: './Template/MergeCell',
+              },
+              {
+                path: '/template/table/tableradio',
+                name: 'tableradio',
+                component: './Template/TableRadio',
+              },
+              {
+                path: '/template/table/datainteration',
+                name: 'datainteration',
+                component: './Template/DataInteration',
+              },
+              {
+                path: '/template/table/tabletest',
+                name: 'tabletest',
+                component: './Template/TableTest',
+              },
+              {
+                path: '/template/table/tablesetdata',
+                name: 'tablesetdata',
+                component: './Template/TableSetData',
+              },
+              {
+                path: '/template/table/dynamictable',
+                name: 'dynamictable',
+                component: './Template/DynamicTable',
+              },
+              {
+                path: '/template/table/tablepagination',
+                name: 'tablepagination',
+                component: './Template/TablePagination',
+              },
+              {
+                path: '/template/table/tablepaginationbefore',
+                name: 'tablepaginationbefore',
+                component: './Template/TablePaginationBefore',
+              },
+            ]
           },
           {
             path: '/template/turntopage',
@@ -51,49 +112,14 @@ export default [
             component: './Template/TurnToPage/Target',
           },
           {
-            path: '/template/morechildmodal',
-            name: 'childmodal',
-            component: './Template/ModalChildDemo',
-          },
-          {
             path: '/template/upload',
             name: 'upload',
             component: './Template/UploadDemo',
           },
           {
-            path: '/template/tableradio',
-            name: 'tableradio',
-            component: './Template/TableRadio',
-          },
-          {
-            path: '/template/datainteration',
-            name: 'datainteration',
-            component: './Template/DataInteration',
-          },
-          {
-            path: '/template/tabletest',
-            name: 'tabletest',
-            component: './Template/TableTest',
-          },
-          {
             path: '/template/selectmoredata',
             name: 'selectmoredata',
             component: './Template/SelectMoreData',
-          },
-          {
-            path: '/template/tablesetdata',
-            name: 'tablesetdata',
-            component: './Template/TableSetData',
-          },
-          {
-            path: '/template/dynamictable',
-            name: 'dynamictable',
-            component: './Template/DynamicTable',
-          },
-          {
-            path: '/template/tablepagination',
-            name: 'tablepagination',
-            component: './Template/TablePagination',
           },
           {
             path: '/template/setstatedemo',
@@ -117,30 +143,19 @@ export default [
           },
         ]
       },
-      // { path: '/', redirect: '/dashboard/analysis' },
-      // {
-      //   path: '/dashboard',
-      //   name: 'dashboard',
-      //   icon: 'dashboard',
-      //   routes: [
-      //     {
-      //       path: '/dashboard/analysis',
-      //       name: 'analysis',
-      //       component: './Dashboard/Analysis',
-      //     },
-      //     {
-      //       path: '/dashboard/monitor',
-      //       name: 'monitor',
-      //       component: './Dashboard/Monitor',
-      //     },
-      //     {
-      //       path: '/dashboard/workplace',
-      //       name: 'workplace',
-      //       component: './Dashboard/Workplace',
-      //     },
-      //   ],
-      // },
-      // forms
+	  {
+        path: '/test',
+        icon: 'appstore',
+        name: 'test',
+        routes: [
+          {
+            path: '/test/layout',
+            name: 'layout',
+            component: './TestComponent/Layout',
+          }
+        ],
+      },
+	  
       {
         path: '/form',
         icon: 'form',
