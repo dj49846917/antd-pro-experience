@@ -1,17 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Form, Button, Input, Row, Col } from 'antd';
+import { Form, Button, Input, Row, Col, Card } from 'antd';
 import RenderSelect from '@/my-components/own/RenderSelect';
+import { getFormItemLayout } from '@/utils/layout';
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
+const colLayout = getFormItemLayout(2);
+const formItemLayout = getFormItemLayout(1);
 
 class TestSelect extends PureComponent {
   state = {
@@ -49,23 +42,44 @@ class TestSelect extends PureComponent {
     const { form } = this.props;
     const { getFieldDecorator } = form;
     return (
-      <div>
+      <Card title="下拉框组件封装">
         <Form>
           <Row>
-            <Col span={8}>
-              <RenderSelect
-                list={data}
-                form={form}
-                label='姓名'
-                field='xm'
-                required
-                titleProp='name'
-                valueProp='userId'
-                // initialValue={data[0].name}
-                width="100%"
-              />
-            </Col>
-            <Col span={8}>
+            <RenderSelect
+              list={data}
+              form={form}
+              label='姓名'
+              field='xm'
+              required
+              titleProp='name'
+              valueProp='userId'
+              columnLayout={2}
+              mode='multiple'
+              width="100%"
+            />
+            <RenderSelect
+              list={data}
+              form={form}
+              label='姓名'
+              field='xm2'
+              required
+              titleProp='name'
+              valueProp='userId'
+              columnLayout={2}
+              width="100%"
+            />
+            <RenderSelect
+              list={data}
+              form={form}
+              label='姓名'
+              field='xm3'
+              required
+              titleProp='name'
+              valueProp='userId'
+              width="100%"
+              disabled
+            />
+            <Col {...colLayout}>
               <Form.Item
                 label="指标"
                 {...formItemLayout}
@@ -82,8 +96,7 @@ class TestSelect extends PureComponent {
           </Row>
         </Form>
         <Button type="primary" onClick={this.sure}>确定</Button>
-
-      </div>
+      </Card>
     )
 
   }

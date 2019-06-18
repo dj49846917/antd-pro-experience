@@ -19,6 +19,7 @@ export default [
     routes: [
       // dashboard
       { path: '/', redirect: '/template/modaldemo' },
+      // 模板组件
       {
         path: '/template',
         name: 'template',
@@ -127,11 +128,6 @@ export default [
             component: './Template/SetStateDemo',
           },
           {
-            path: '/template/testSelect',
-            name: 'testselect',
-            component: './Template/TestSelect',
-          },
-          {
             path: '/template/formcheck',
             name: 'formcheck',
             component: './Template/FormCheck',
@@ -143,7 +139,8 @@ export default [
           },
         ]
       },
-	  {
+      // 测试组件
+      {
         path: '/test',
         icon: 'appstore',
         name: 'test',
@@ -152,10 +149,20 @@ export default [
             path: '/test/layout',
             name: 'layout',
             component: './TestComponent/Layout',
-          }
+          },
+          {
+            path: '/test/testSelect',
+            name: 'testselect',
+            component: './TestComponent/TestSelect',
+          },
+          {
+            path: '/test/inputnumber',
+            name: 'inputnumber',
+            component: './TestComponent/TestInputNumber',
+          },
         ],
       },
-	  
+
       {
         path: '/form',
         icon: 'form',

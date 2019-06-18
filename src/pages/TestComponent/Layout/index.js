@@ -1,9 +1,15 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Form, Button, Input, Row, Col, Select, Card } from 'antd';
-import { getFormItemLayout, getFormItemLayoutWithoutOffset } from '@/utils/layout';
+import { getFormItemLayout, getOneFormItemLayout } from '@/utils/layout';
 
+// 一行两列组合
 const colLayout = getFormItemLayout(2);
 const formItemLayout = getFormItemLayout(1);
+
+// 一行一列组合
+const colOneLayout = getOneFormItemLayout(1);
+const formItemOneLayout = getOneFormItemLayout();
+
 class Layout extends PureComponent {
   sure = () => {
     const { form } = this.props;
@@ -83,10 +89,10 @@ class Layout extends PureComponent {
 		  </Card>
 		  <Card title="一行一列" style={{marginTop: '20px'}}>
 		  <Row>
-			<Col {...formItemLayout}>
+			<Col {...colOneLayout}>
               <Form.Item
                 label="姓名"
-                {...formItemLayout}
+                {...formItemOneLayout}
               >
                 {getFieldDecorator('name', {
                   rules: [{
@@ -97,10 +103,10 @@ class Layout extends PureComponent {
                 )}
               </Form.Item>
             </Col>
-			      <Col {...formItemLayout}>
+			      <Col {...colOneLayout}>
               <Form.Item
                 label="年龄"
-                {...formItemLayout}
+                {...formItemOneLayout}
               >
                 {getFieldDecorator('age', {
                   rules: [{
@@ -111,10 +117,10 @@ class Layout extends PureComponent {
                 )}
               </Form.Item>
             </Col>
-			      <Col {...formItemLayout}>
+			      <Col {...colOneLayout}>
               <Form.Item
                 label="性别"
-                {...formItemLayout}
+                {...formItemOneLayout}
               >
                 {getFieldDecorator('sex', {
                   rules: [{
