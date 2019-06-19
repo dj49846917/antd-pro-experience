@@ -27,6 +27,7 @@ class TestInputNumber extends PureComponent {
                 {...formItemLayout}
               >
                 {getFieldDecorator('ChineseNm', {
+                  initialValue: "张三",
                   rules: [{
                     required: true, message: '请输入',
                   }],
@@ -37,19 +38,37 @@ class TestInputNumber extends PureComponent {
             </Col>
             <MoneyInputNumber
               columnLayout={2}
-              initailValue={20}
+              initialValue={20}
               form={form}
               label="金额"
               field="money"
               width="100%"
               required
+              decimalsPrecision={3}
             />
             <MoneyInputNumber
-              initailValue={20}
+              columnLayout={2}
+              initialValue={40}
               form={form}
               label="金额"
-              field="money"
+              field="money1"
               width="100%"
+              required
+              decimalsPrecision={0}
+            />
+            <MoneyInputNumber
+              initialValue={600.05}
+              form={form}
+              label="金额"
+              field="money2"
+              width="100%"
+            />
+            <MoneyInputNumber
+              form={form}
+              label="金额"
+              field="money3"
+              width="100%"
+              allowMinus
             />
           </Row>
         </Form>

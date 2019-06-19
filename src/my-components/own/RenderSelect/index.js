@@ -3,6 +3,8 @@ import { Select, Form, Col } from 'antd';
 import { getFormItemLayout, getOneFormItemLayout } from '@/utils/layout';
 
 /**
+ * @description   下拉组件
+ * 
  * @param label: 			非必传， 			页签的标题 (string)
  * @param list： 			必传， 				展示的列表数据 (array)
  * @param required： 		非必传，			控制是否校验 (boolean)
