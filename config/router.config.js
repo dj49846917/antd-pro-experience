@@ -160,6 +160,11 @@ export default [
             name: 'inputnumber',
             component: './TestComponent/TestInputNumber',
           },
+          {
+            path: '/test/datepicker',
+            name: 'datepicker',
+            component: './TestComponent/TestDate',
+          },
         ],
       },
 

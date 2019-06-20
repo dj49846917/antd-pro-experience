@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { DatePicker, Form, Col } from 'antd';
+import moment from 'moment';
 import { getFormItemLayout, getOneFormItemLayout } from '@/utils/layout';
 
 /**
@@ -31,6 +32,9 @@ class MoneyInputNumber extends PureComponent {
       field,
       disabled,
       columnLayout,
+	  fromBefore,
+	  fromNow,
+	  dateFormat,
       ...rest
     } = this.props;
     // 计算当前日期或之前的日期
@@ -56,7 +60,7 @@ class MoneyInputNumber extends PureComponent {
     return (
       <Form.Item label={label} {...rest} {...formItemLayout}>
         {getFieldDecorator(field, {
-          initialValue: typeof initialValue === 'function' ? initialValue() : initialValue, // �жϳ�ʼֵ������
+          initialValue: typeof initialValue === 'function' ? initialValue() : initialValue,
           validateFirst: true,
           rules: [
             {
