@@ -11,11 +11,11 @@ class TestDate extends PureComponent {
   sure = () => {
     const { form } = this.props;
     form.validateFields((err, values) => {
-	  const params = values;
-	  params.time1 = moment(params.time1).format('YYYYMMDD');
-	  params.time2 = moment(params.time2).format('YYYYMMDD');
-	  params.time3 = moment(params.time3).format('YYYYMMDD');
-	  console.log('values', params);
+      const params = values;
+      params.time1 = moment(params.time1).format('YYYYMMDD');
+      params.time2 = moment(params.time2).format('YYYYMMDD');
+      params.time3 = moment(params.time3).format('YYYYMMDD');
+      console.log('values', params);
     })
   }
 
@@ -31,43 +31,44 @@ class TestDate extends PureComponent {
               label='创建时间'
               field='time1'
               columnLayout={2}
-			  required
+              required
               width="100%"
             />
-			<RenderDate
+            <RenderDate
               form={form}
               label='更新时间'
               field='time2'
               columnLayout={2}
               width="100%"
-			  required
-			  dateFormat="YYYY/MM/DD"
+              required
+              dateFormat="YYYY/MM/DD"
             />
-			<RenderDate
+            <RenderDate
               form={form}
               label='更新时间'
               field='time3'
               columnLayout={0}
               width="100%"
-			  required
-			  initialValue={moment('20180412')}
+              required
+              initialValue={moment('20190512')}
             />
-			<RenderDate
+            <RenderDate
               form={form}
-              label='更新时间'
+              label='更新时间2'
               field='time4'
               width="100%"
-			  required
-			  fromBefore
-			  initialValue={moment('20180412')}
+              required
+              fromBefore
+              initialValue={moment('20190412')}
             />
-			<RenderDate
+            <RenderDate
               form={form}
-              label='更新时间'
+              label='更新时间3'
               field='time5'
               width="100%"
-			  required
-			  fromNow
+              required
+              initialValue={moment('20190414')}
+              fromNow
             />
             <Col {...colLayout}>
               <Form.Item

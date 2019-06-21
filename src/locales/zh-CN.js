@@ -96,6 +96,7 @@ export default {
   'menu.test.testselect': '下拉组件',
   'menu.test.inputnumber': '金额组件',
   'menu.test.datepicker': '日期组件',
+  'menu.test.customer': '客户组件',
   'menu.home': '首页',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',

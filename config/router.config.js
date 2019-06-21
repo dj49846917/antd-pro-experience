@@ -165,6 +165,11 @@ export default [
             name: 'datepicker',
             component: './TestComponent/TestDate',
           },
+          {
+            path: '/test/customer',
+            name: 'customer',
+            component: './TestComponent/TestCustomer',
+          },
         ],
       },
 
