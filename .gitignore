@@ -8,7 +8,6 @@ _roadhog-api-doc
 
 # production
 /dist
-/.vscode
 
 # misc
 .DS_Store
@@ -19,14 +18,14 @@ yarn-error.log
 .idea
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 *bak
-.vscode
+
 
 # visual studio code
 .history
 *.log
-
-functions/mock
+functions/*
 .temp/**
 
 # umi
@@ -36,3 +35,6 @@ functions/mock
 # screenshot
 screenshot
 .firebase
+.eslintcache
+
+build

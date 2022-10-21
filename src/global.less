@@ -1,3 +1,5 @@
+@import '~antd/es/style/variable.less';
+
 html,
 body,
 #root {
@@ -11,6 +13,9 @@ body,
 .ant-layout {
   min-height: 100vh;
 }
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
 
 canvas {
   display: block;
@@ -22,12 +27,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.globalSpin {
-  width: 100%;
-  margin: 40px 0 !important;
-}
-
 ul,
 ol {
   list-style: none;
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Compatible with IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
+  }
 }
