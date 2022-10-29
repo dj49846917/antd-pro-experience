@@ -15,6 +15,7 @@ export type CommonParamType = {
 }
 // tree的类型
 export interface TreeDataNode extends DataNode {
+    id?: number,
     value?: string,
     childdren?: any
 }

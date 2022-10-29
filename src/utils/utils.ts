@@ -1,6 +1,7 @@
 import { history } from 'umi'
 import { stringify } from 'querystring';
 import { CommonParamType, DicType, TreeDataNode } from '@/types';
+import { DataNode } from 'antd/lib/tree';
 
 export const utils = {
   /**
@@ -176,5 +177,122 @@ export const utils = {
         children: menu.children && utils.parseTreeData(menu.children, obj)
       }
     })
+  },
+  /**
+   * 获取tree的最大层级数
+   * @param arr 
+   * @returns 
+   * 例：
+   *    const arr = [{title:'0-0',key:'0-0',children:[{title:'0-0-0',key:'0-0-0',children:[{title:'0-0-0-0',key:'0-0-0-0'},{title:'0-0-0-1',key:'0-0-0-1'},{title:'0-0-0-2',key:'0-0-0-2'},],},{title:'0-0-1',key:'0-0-1',children:[{title:'0-0-1-0',key:'0-0-1-0'},{title:'0-0-1-1',key:'0-0-1-1'},{title:'0-0-1-2',key:'0-0-1-2'},],},{title:'0-0-2',key:'0-0-2',},],},{title:'0-1',key:'0-1',children:[{title:'0-1-0-0',key:'0-1-0-0'},{title:'0-1-0-1',key:'0-1-0-1'},{title:'0-1-0-2',key:'0-1-0-2'},],},{title:'0-2',key:'0-2',},];
+   *    calculationLevel(arr)
+   * 输出：
+   *    3
+   */
+  calculationLevel: (arr: CommonParamType[]): number => {
+    //递归计算树形数据最大的层级数
+    let maxLevel = 0;
+    // @ts-ignore
+    !function multiArr(arr, level) {
+      ++level;
+      maxLevel = Math.max(level, maxLevel);
+      for (let i = 0; i < arr.length; i++) {
+        let item = arr[i];
+        item.level = level;
+        if (item.children && item.children.length > 0) {
+          multiArr(item.children, level);
+        } else {
+          delete item.children;
+        }
+      }
+    }(arr, 0);
+    return maxLevel;
+  },
+  /**
+   * 查询指定节点的直接父节点
+   * @param treeData tree数据
+   * @param key 节点id
+   * @returns 
+   * 例：
+   *    const arr = [{title:'0-0',key:'0-0',children:[{title:'0-0-0',key:'0-0-0',children:[{title:'0-0-0-0',key:'0-0-0-0'},{title:'0-0-0-1',key:'0-0-0-1'},{title:'0-0-0-2',key:'0-0-0-2'},],},{title:'0-0-1',key:'0-0-1',children:[{title:'0-0-1-0',key:'0-0-1-0'},{title:'0-0-1-1',key:'0-0-1-1'},{title:'0-0-1-2',key:'0-0-1-2'},],},{title:'0-0-2',key:'0-0-2',},],},{title:'0-1',key:'0-1',children:[{title:'0-1-0-0',key:'0-1-0-0'},{title:'0-1-0-1',key:'0-1-0-1'},{title:'0-1-0-2',key:'0-1-0-2'},],},{title:'0-2',key:'0-2',},];
+   *    findParents(arr, "0-0-0")
+   * 输出：
+   *    ['0-0']
+   */
+  findParents(treeData: DataNode[], key: string) {
+    if (treeData.length == 0) return
+    for (let i = 0; i < treeData.length; i++) {
+      if (treeData[i].key == key) {
+        return []
+      } else {
+        if (treeData[i].children) {
+          let res: any = utils.findParents(treeData[i].children as DataNode[], key)
+          if (res !== undefined) {
+            return res.concat(treeData[i].key)
+          }
+        }
+      }
+    }
+  },
+  /**
+   * tree扁平化
+   * @param treeList        数据源
+   * @param flatList        返回的数据
+   * @returns 
+   * 例：
+   *    const arr = [{title:'0-0',key:'0-0',children:[{title:'0-0-0',key:'0-0-0',children:[{title:'0-0-0-0',key:'0-0-0-0'},{title:'0-0-0-1',key:'0-0-0-1'},{title:'0-0-0-2',key:'0-0-0-2'},],},{title:'0-0-1',key:'0-0-1',children:[{title:'0-0-1-0',key:'0-0-1-0'},{title:'0-0-1-1',key:'0-0-1-1'},{title:'0-0-1-2',key:'0-0-1-2'},],},{title:'0-0-2',key:'0-0-2',},],},{title:'0-1',key:'0-1',children:[{title:'0-1-0-0',key:'0-1-0-0'},{title:'0-1-0-1',key:'0-1-0-1'},{title:'0-1-0-2',key:'0-1-0-2'},],},{title:'0-2',key:'0-2',},];
+   *    treeToFlat(arr, [])
+   * 输出：
+   *    [{"title":"0-0-0-0","key":"0-0-0-0"},{"title":"0-0-0-1","key":"0-0-0-1"},{"title":"0-0-0-2","key":"0-0-0-2"},{"title":"0-0-0","key":"0-0-0","children":[]},{"title":"0-0-1-0","key":"0-0-1-0"},{"title":"0-0-1-1","key":"0-0-1-1"},{"title":"0-0-1-2","key":"0-0-1-2"},{"title":"0-0-1","key":"0-0-1","children":[]},{"title":"0-0-2","key":"0-0-2"},{"title":"0-0","key":"0-0","children":[]},{"title":"0-1-0-0","key":"0-1-0-0"},{"title":"0-1-0-1","key":"0-1-0-1"},{"title":"0-1-0-2","key":"0-1-0-2"},{"title":"0-1","key":"0-1","children":[]},{"title":"0-2","key":"0-2"}]
+   */
+  treeToFlat(treeList: TreeDataNode[], flatList: TreeDataNode[]) {
+    // flatList.length > 9999 是考虑底线保护原则，出于极限保护的目的设置的，可不设或按需设置。
+    if (flatList.length > 9999) {
+      return
+    }
+    treeList.map(e => {
+      // 递归：有条件的自己调用自己，条件是 e.children.length 为真
+      if (e.children && e.children.length) {
+        utils.treeToFlat(e.children, flatList)
+        e.children = []
+      }
+      flatList.push(e)
+    })
+    // console.log('扁平化后：', flatList)
+    return flatList
+  },
+  /**
+   * 扁平化数据转tree
+   * @param flatList 
+   * @param treeList 
+   * @returns 
+   * 例：
+   *    const arr = [{id:1,pid:null,label:'第一层',value:'1',children:[{id:2,pid:1,label:'第二层1',value:'2.1',children:[]},{id:3,pid:1,label:'第二层2',value:'2.2',children:[]},{id:4,pid:1,label:'第二层3',value:'2.3',children:[{id:5,pid:4,label:'第三层1',value:'3.1',children:[]},{id:6,pid:4,label:'第三层2',value:'3.2',children:[]},],},],},{id:2,pid:1,label:'第二层1',value:'2.1',children:[]},{id:3,pid:1,label:'第二层2',value:'2.2',children:[]},{id:4,pid:1,label:'第二层3',value:'2.3',children:[{id:5,pid:4,label:'第三层1',value:'3.1',children:[]},{id:6,pid:4,label:'第三层2',value:'3.2',children:[]},],},{id:5,pid:4,label:'第三层1',value:'3.1',children:[]},{id:6,pid:4,label:'第三层2',value:'3.2',children:[]},];console.log('flat =>tree，反扁平化后：',flatToTree(origin,[]));}
+   *    flatToTree(arr, [])
+   * 输出：
+   *    [{"id":1,"pid":null,"label":"第一层","value":"1","children":[{"id":2,"pid":1,"label":"第二层1","value":"2.1","children":[]},{"id":3,"pid":1,"label":"第二层2","value":"2.2","children":[]},{"id":4,"pid":1,"label":"第二层3","value":"2.3","children":[{"id":5,"pid":4,"label":"第三层1","value":"3.1","children":[]},{"id":6,"pid":4,"label":"第三层2","value":"3.2","children":[]}]}]}]
+   */
+  flatToTree: (flatList: any[], treeList: TreeDataNode[]) => {
+    flatList.map(e => {
+      // 以 e.pid===null,作为判断是不是根节点的依据，或者直接写死根节点（如果确定的话），
+      // 具体以什么作为判断根节点的依据，得看数据的设计规则，通常是判断层级或是否代表根节点的标记
+      if (e.pid === null) {
+        // 避免出现重复数据
+        const index = treeList.findIndex(sub => sub.id === e.id)
+        if (index === -1) {
+          treeList.push(e)
+        }
+      }
+
+      flatList.map(e2 => {
+        if (e2.id === e.id) {
+          // 避免出现重复数据
+          const index = e.children.findIndex((sub: { id: number; }) => sub.id === e2.id)
+          if (index === -1) {
+            e.children.push(e2)
+          }
+        }
+      })
+    })
+    return treeList
   }
 }
