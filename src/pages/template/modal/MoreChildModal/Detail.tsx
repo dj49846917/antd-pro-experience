@@ -1,46 +1,67 @@
-import { Form, Input, Modal } from "antd";
-import normalModalInfo, { DataSource } from "../NormalModal/data";
+import { Button, Form, FormInstance, Input, Modal } from "antd";
+import { useContext } from "react";
+import normalModalInfo from "../NormalModal/data";
+import { ActionType, ModalContext } from "./context";
 
 type Props = {
-  visible: boolean;
-  closeModal: (show: boolean) => void;
-  sureAction: (result: DataSource) => void,
-  actionType: "add" | 'edit' | 'delete',
-  activeRow: DataSource
-};
+  form: FormInstance<any>,
+  secForm: FormInstance<any>,
+}
 
 function Detail(props: Props) {
-  const [addForm] = Form.useForm()
+  const { state, dispatch } = useContext(ModalContext)
 
   const sureAction = async () => {
-    const result = await addForm.validateFields()
+    const result = await props.form.validateFields()
     if (result) {
-      props.closeModal(false)
+      if (state.activeType === 'add') {
+        const row = {
+          ...result,
+          ClassifyNm: '基本情况',
+          id: Date.now()
+        }
+        dispatch({ type: ActionType.changeDataSource, payload: { ...state, dataSource: [row, ...state.dataSource] } })
+      }
+      if (state.activeType === 'edit') {
+        const row = {
+          ...state.activeRow,
+          ...result,
+        }
+        const list = state.dataSource.map(item => {
+          if (item.id === row.id) {
+            return row
+          }
+          return item
+        })
+        dispatch({ type: ActionType.changeDataSource, payload: { ...state, dataSource: list } })
+      }
+      dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: false } })
     }
-    props.sureAction({
-      ...result,
-      ClassifyNm: '基本情况',
-      id: Date.now()
-    })
   }
 
   const cancelAction = () => {
-    addForm.resetFields()
-    props.closeModal(false)
+    props.form.resetFields()
+    dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: false } })
+  }
+
+  const openSecModal = () => {
+    dispatch({ type: ActionType.changeSecVisible, payload: { ...state, secVisible: true } })
+    if (state.activeType === 'edit') {
+      props.secForm.setFieldsValue(state.activeRow)
+    }
   }
 
   return (
     <Modal
-      title={props.actionType === 'add' ? "添加" : "编辑"}
-      open={props.visible}
+      title={state.activeType === 'add' ? "添加" : "编辑"}
+      open={state.visible}
       onOk={sureAction}
       onCancel={cancelAction}
       width="40%"
-      afterClose={() => { addForm.resetFields() }}
     >
       <Form
         name="add_form"
-        form={addForm}
+        form={props.form}
         {...normalModalInfo.formItemLayout}
       >
         <Form.Item
@@ -59,10 +80,15 @@ function Detail(props: Props) {
         </Form.Item>
         <Form.Item
           label="评分"
-          name="point"
-          rules={[{ required: true, message: '请输入' }]}
         >
-          <Input placeholder='请输入' />
+          <Form.Item
+            noStyle
+            name="point"
+            rules={[{ required: true, message: '请输入' }]}
+          >
+            <Input placeholder='请输入' style={{ maxWidth: '160px' }} disabled />
+          </Form.Item>
+          <Button type="primary" onClick={openSecModal}>。。。</Button>
         </Form.Item>
       </Form>
     </Modal>

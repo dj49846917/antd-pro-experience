@@ -1,54 +1,41 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { Button, Card, Divider, Popconfirm, Spin, Table } from 'antd'
-import { useEffect, useState } from 'react'
+import { Button, Card, Divider, Form, Popconfirm, Spin, Table } from 'antd'
+import { useEffect, useReducer, useState } from 'react'
 import { useIntl } from 'umi'
 import normalModalInfo, { DataSource } from '../NormalModal/data'
+import { ActionType, initialState, ModalContext, reducer } from './context'
 import Detail from './Detail'
+import GrandSun from './GrandSun'
 
 function MoreChildModal() {
-  const [visible, setVisible] = useState(false)
-  const [activeRow, setActiveRow] = useState<DataSource>({} as DataSource)
-  const [list, setList] = useState<DataSource[]>([])
+  const [state, dispatch] = useReducer(reducer, initialState)
   const [loading, setLoading] = useState(false)
-  const [actionType, setActionType] = useState<'add' | 'edit' | 'delete'>("add")
+  const [secForm] = Form.useForm()
+  const [form] = Form.useForm()
+
   const intl = useIntl()
   useEffect(() => {
     setLoading(true)
-    setList(normalModalInfo.dataSource)
+    dispatch({ type: ActionType.changeDataSource, payload: { ...state, dataSource: normalModalInfo.dataSource } })
     setLoading(false)
   }, [])
   // 按钮操作
   const action = (type: 'add' | 'edit' | 'delete', record?: DataSource) => {
-    setActionType(type)
+    dispatch({ type: ActionType.changeActiveType, payload: { ...state, activeType: type } })
     if (type === 'add') {
-      setVisible(true)
+      form.resetFields()
+      secForm.resetFields()
+      dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: true } })
     }
     if (type === 'edit') {
-      setVisible(true)
-      setActiveRow(record as DataSource)
+      dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: true } })
+      form.setFieldsValue(record)
+      dispatch({ type: ActionType.changeActiveRow, payload: { ...state, activeRow: record as DataSource } })
     }
     if (type === 'delete') {
-      setActiveRow({} as DataSource)
-      setList((data) => data.filter(x => x.id !== record?.id))
+      dispatch({ type: ActionType.changeActiveRow, payload: { ...state, activeRow: {} as DataSource } })
+      dispatch({ type: ActionType.changeDataSource, payload: { ...state, dataSource: state.dataSource.filter(x => x.id !== record?.id) } })
     }
-  }
-
-  // 新增
-  const addSure = (result: DataSource) => {
-    setList((data) => {
-      return [result, ...data]
-    })
-  }
-  // 编辑
-  const editSure = (result: DataSource) => {
-    setList((data) => {
-      return data.map(item => {
-        if (item.id === result.id) {
-          return result
-        }
-        return item
-      })
-    })
   }
 
   const columns = [
@@ -88,24 +75,21 @@ function MoreChildModal() {
   ];
 
   return (
-    <Spin spinning={loading}>
-      <Card title={intl.formatMessage({ id: 'menu.template.modal.more-child-modal', defaultMessage: '弹窗在子页面和孙页面' })} bordered>
-        <Button type='primary' onClick={() => action("add")}>添加</Button>
-        <Table
-          dataSource={list}
-          columns={columns}
-          bordered
-          rowKey="id"
-        />
-      </Card>
-      {visible && <Detail
-        activeRow={activeRow}
-        actionType={actionType}
-        sureAction={addSure}
-        visible={visible}
-        closeModal={(show: boolean) => setVisible(show)}
-      />}
-    </Spin>
+    <ModalContext.Provider value={{ state, dispatch }}>
+      <Spin spinning={loading}>
+        <Card title={intl.formatMessage({ id: 'menu.template.modal.more-child-modal', defaultMessage: '弹窗在子页面和孙页面' })} bordered>
+          <Button type='primary' onClick={() => action("add")}>添加</Button>
+          <Table
+            dataSource={state.dataSource}
+            columns={columns}
+            bordered
+            rowKey="id"
+          />
+        </Card>
+        {state.visible && <Detail form={form} secForm={secForm} />}
+        {state.secVisible && <GrandSun form={form} secForm={secForm} />}
+      </Spin>
+    </ModalContext.Provider>
   )
 }
 
