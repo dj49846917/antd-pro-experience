@@ -1,37 +1,44 @@
 import { Form, Input, Modal } from "antd";
-import normalModalInfo, { DataSource } from "./data";
+import { useEffect } from "react";
+import normalModalInfo, { DataSource } from "../NormalModal/data";
 
 type Props = {
   visible: boolean;
   closeModal: (show: boolean) => void,
+  activeRow: DataSource,
   sureAction: (result: DataSource) => void
 };
 
-function ModalChild(props: Props) {
-  const [form] = Form.useForm()
+function EditComponent(props: Props) {
+  const [editForm] = Form.useForm()
+
+  useEffect(() => {
+    if (props.visible && JSON.stringify(props.activeRow) !== '{}') {
+      editForm.setFieldsValue(props.activeRow)
+    }
+  }, [props.visible, props.activeRow])
 
   const sureAction = async () => {
-    const result = await form.validateFields()
+    const result = await editForm.validateFields()
     if (result) {
       props.closeModal(false)
       props.sureAction({
+        ...props.activeRow,
         ...result,
-        ClassifyNm: '基本情况',
-        id: Date.now()
       })
     }
   }
 
   const cancelAction = () => {
-    form.resetFields()
+    editForm.resetFields()
     props.closeModal(false)
   }
 
   return (
-    <Modal title="添加" open={props.visible} onOk={sureAction} onCancel={cancelAction} width="40%" afterClose={() => { form.resetFields() }}>
+    <Modal title="编辑" open={props.visible} onOk={sureAction} onCancel={cancelAction} width="40%" afterClose={() => { editForm.resetFields() }}>
       <Form
         name="add_form"
-        form={form}
+        form={editForm}
         {...normalModalInfo.formItemLayout}
       >
         <Form.Item
@@ -60,4 +67,4 @@ function ModalChild(props: Props) {
   )
 }
 
-export default ModalChild;
+export default EditComponent;

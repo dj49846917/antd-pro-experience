@@ -9,5 +9,8 @@ export default {
   'menu.exception.not-find': '404',
   'menu.exception.server-error': '500',
   'menu.template': '模板',
-  'menu.template.normal-modal': '子组件弹框',
+  'menu.template.modal': '弹框',
+  'menu.template.modal.normal-modal': '子组件弹框',
+  'menu.template.modal.more-modal': '多个子组件弹框',
+  'menu.template.modal.more-child-modal': '弹窗在子页面和孙页面',
 };

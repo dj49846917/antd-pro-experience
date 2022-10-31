@@ -1,37 +1,37 @@
 import { Form, Input, Modal } from "antd";
-import normalModalInfo, { DataSource } from "./data";
+import normalModalInfo, { DataSource } from "../NormalModal/data";
 
 type Props = {
   visible: boolean;
-  closeModal: (show: boolean) => void,
+  closeModal: (show: boolean) => void;
   sureAction: (result: DataSource) => void
 };
 
-function ModalChild(props: Props) {
-  const [form] = Form.useForm()
+function AddComponent(props: Props) {
+  const [addForm] = Form.useForm()
 
   const sureAction = async () => {
-    const result = await form.validateFields()
+    const result = await addForm.validateFields()
     if (result) {
       props.closeModal(false)
-      props.sureAction({
-        ...result,
-        ClassifyNm: '基本情况',
-        id: Date.now()
-      })
     }
+    props.sureAction({
+      ...result,
+      ClassifyNm: '基本情况',
+      id: Date.now()
+    })
   }
 
   const cancelAction = () => {
-    form.resetFields()
+    addForm.resetFields()
     props.closeModal(false)
   }
 
   return (
-    <Modal title="添加" open={props.visible} onOk={sureAction} onCancel={cancelAction} width="40%" afterClose={() => { form.resetFields() }}>
+    <Modal title="添加" open={props.visible} onOk={sureAction} onCancel={cancelAction} width="40%" afterClose={() => { addForm.resetFields() }}>
       <Form
         name="add_form"
-        form={form}
+        form={addForm}
         {...normalModalInfo.formItemLayout}
       >
         <Form.Item
@@ -60,4 +60,4 @@ function ModalChild(props: Props) {
   )
 }
 
-export default ModalChild;
+export default AddComponent;

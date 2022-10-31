@@ -20,19 +20,45 @@
     access: 'canAdmin',
     routes: [
       {
-        path: '/template/normalmodal',
-        name: 'normal-modal',
+        path: '/template/modal',
+        name: 'modal',
         icon: 'smile',
-        component: './template/modal/NormalModal',
+        routes: [
+          {
+            path: '/template/modal',
+            redirect: '/template/modal/normalmodal',
+          },
+          {
+            path: '/template/modal/normalmodal',
+            name: 'normal-modal',
+            icon: 'smile',
+            component: './template/modal/NormalModal',
+          },
+          {
+            path: '/template/modal/moremodal',
+            name: 'more-modal',
+            icon: 'smile',
+            component: './template/modal/MoreModal',
+          },
+          {
+            path: '/template/modal/morechildmodal',
+            name: 'more-child-modal',
+            icon: 'smile',
+            component: './template/modal/MoreChildModal',
+          },
+          {
+            component: './404',
+          }
+        ]
       },
       {
         component: './404',
-      },
+      }
     ],
   },
   {
     path: '/',
-    redirect: '/template/normalmodal',
+    redirect: '/template/modal',
   },
   {
     component: './404',

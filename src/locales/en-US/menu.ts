@@ -9,5 +9,8 @@ export default {
   'menu.exception.not-find': '404',
   'menu.exception.server-error': '500',
   'menu.template': 'template',
-  'menu.template.normal-modal': 'child component modal',
+  'menu.template.modal': 'modal',
+  'menu.template.modal.normal-modal': 'child component modal',
+  'menu.template.modal.more-modal': 'more child component modal',
+  'menu.template.modal.more-child-modal': 'modal in child and grandsun',
 };
