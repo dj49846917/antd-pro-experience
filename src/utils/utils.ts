@@ -5,6 +5,35 @@ import { DataNode } from 'antd/lib/tree';
 
 export const utils = {
   /**
+   * 将js对象转换为url参数
+   * 
+   * @param param     参数
+   * @param idx
+   * @returns 
+   * 例：
+   *    const params = { userId: '0001', userName: '张三' }
+   *    urlEncode(params, 1)
+   * 
+   * 输出：
+   *    ?userId=0001&userName=张三
+   */
+  urlEncode: (param: CommonParamType, idx: number, key?: string, encode?: null) => {
+    if (param == null) return '';
+    let paramStr = '';
+    const t = typeof (param);
+    if (t == 'string' || t == 'number' || t == 'boolean') {
+      var one_is = idx < 3 ? '?' : '&';
+      paramStr += one_is + key + '=' + param;
+    } else {
+      for (var i in param) {
+        const k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
+        idx++
+        paramStr += utils.urlEncode(param[i], idx, k, encode);
+      }
+    }
+    return paramStr;
+  },
+  /**
    * 获取地址栏后面的参数
    * @param name      参数名
    * @returns         返回对应的数据（string）

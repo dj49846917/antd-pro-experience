@@ -2,9 +2,9 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Card, Divider, Popconfirm, Spin, Table } from 'antd'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'umi'
-import normalModalInfo, { DataSource } from '../NormalModal/data'
-import AddComponent from './Add'
-import EditComponent from './Edit'
+import normalModalInfo, { DataSource } from '@/pages/template/modal/NormalModal/data'
+import AddComponent from '@/pages/template/modal/MoreModal/Add'
+import EditComponent from '@/pages/template/modal/MoreModal/Edit'
 
 function MoreModal() {
   const [visible, setVisible] = useState(false)

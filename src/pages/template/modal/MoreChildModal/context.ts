@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { DataSource } from "../NormalModal/data";
+import { DataSource } from "@/pages/template/modal/NormalModal/data";
 type ProcessAction = {
   type: ActionType,
   payload: ModalStateType

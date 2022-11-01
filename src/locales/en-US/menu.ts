@@ -13,4 +13,8 @@ export default {
   'menu.template.modal.normal-modal': 'child component modal',
   'menu.template.modal.more-modal': 'more child component modal',
   'menu.template.modal.more-child-modal': 'modal in child and grandsun',
+  'menu.template.turntopage': 'turn to page',
+  'menu.template.targetpage': 'target page',
+  'menu.template.table': 'table',
+  'menu.template.table.tableradio': 'tableradio',
 };

@@ -1,7 +1,7 @@
 import { Form, FormInstance, Input, Modal } from "antd"
 import { useContext } from "react"
-import normalModalInfo from "../NormalModal/data"
-import { ActionType, ModalContext } from "./context"
+import normalModalInfo from "@/pages/template/modal/NormalModal/data"
+import { ActionType, ModalContext } from "@/pages/template/modal/MoreChildModal/context"
 
 type Props = {
   form: FormInstance<any>,

@@ -1,5 +1,5 @@
 import { Form, Input, Modal } from "antd";
-import normalModalInfo, { DataSource } from "./data";
+import normalModalInfo, { DataSource } from "@/pages/template/modal/NormalModal/data";
 
 type Props = {
   visible: boolean;

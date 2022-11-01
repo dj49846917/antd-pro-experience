@@ -2,10 +2,10 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Card, Divider, Form, Popconfirm, Spin, Table } from 'antd'
 import { useEffect, useReducer, useState } from 'react'
 import { useIntl } from 'umi'
-import normalModalInfo, { DataSource } from '../NormalModal/data'
-import { ActionType, initialState, ModalContext, reducer } from './context'
-import Detail from './Detail'
-import GrandSun from './GrandSun'
+import normalModalInfo, { DataSource } from '@/pages/template/modal/NormalModal/data'
+import { ActionType, initialState, ModalContext, reducer } from '@/pages/template/modal/MoreChildModal/context'
+import Detail from '@/pages/template/modal/MoreChildModal/Detail'
+import GrandSun from '@/pages/template/modal/MoreChildModal/GrandSun'
 
 function MoreChildModal() {
   const [state, dispatch] = useReducer(reducer, initialState)

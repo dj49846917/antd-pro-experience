@@ -13,4 +13,8 @@ export default {
   'menu.template.modal.normal-modal': '子组件弹框',
   'menu.template.modal.more-modal': '多个子组件弹框',
   'menu.template.modal.more-child-modal': '弹窗在子页面和孙页面',
+  'menu.template.turntopage': '跳转页面',
+  'menu.template.targetpage': '目标页面',
+  'menu.template.table': '表格',
+  'menu.template.table.tableradio': '点击选中一条数据',
 };

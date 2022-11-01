@@ -1,8 +1,8 @@
 import { Button, Card, Spin, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { useIntl } from 'umi';
-import normalModalInfo, { DataSource } from './data';
-import ModalChild from './ModalChild';
+import normalModalInfo, { DataSource } from '@/pages/template/modal/NormalModal/data';
+import ModalChild from '@/pages/template/modal/NormalModal/ModalChild';
 
 function NormalModal() {
   const [visible, setVisible] = useState(false);

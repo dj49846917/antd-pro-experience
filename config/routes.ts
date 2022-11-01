@@ -52,6 +52,39 @@
         ]
       },
       {
+        path: '/template/table',
+        name: 'table',
+        icon: 'smile',
+        routes: [
+          {
+            path: '/template/table',
+            redirect: '/template/table/tableradio',
+          },
+          {
+            path: '/template/table/tableradio',
+            name: 'tableradio',
+            icon: 'smile',
+            component: './template/table/TableRadio',
+          },
+          {
+            component: './404',
+          }
+        ]
+      },
+      {
+        path: '/template/other/turntopage',
+        name: 'turntopage',
+        icon: 'smile',
+        component: './template/other/TurnToPage',
+      },
+      {
+        path: '/template/other/targetpage',
+        name: 'targetpage',
+        icon: 'smile',
+        component: './template/other/TurnToPage/Target',
+        hideInMenu: true
+      },
+      {
         component: './404',
       }
     ],
