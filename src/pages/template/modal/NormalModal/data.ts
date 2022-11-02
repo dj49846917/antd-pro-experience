@@ -10,7 +10,7 @@ export type DataSource = {
   day: string,
 }
 
-type ColumnsType = {
+export type ColumnsType = {
   title: string,
   dataIndex: string,
   key: string

@@ -17,4 +17,5 @@ export default {
   'menu.template.targetpage': 'target page',
   'menu.template.table': 'table',
   'menu.template.table.tableradio': 'tableradio',
+  'menu.template.table.mergecell': 'mergecell',
 };

@@ -17,4 +17,5 @@ export default {
   'menu.template.targetpage': '目标页面',
   'menu.template.table': '表格',
   'menu.template.table.tableradio': '点击选中一条数据',
+  'menu.template.table.mergecell': '合并单元格',
 };

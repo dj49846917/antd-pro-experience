@@ -67,6 +67,12 @@
             component: './template/table/TableRadio',
           },
           {
+            path: '/template/table/mergecell',
+            name: 'mergecell',
+            icon: 'smile',
+            component: './template/table/MergeCell',
+          },
+          {
             component: './404',
           }
         ]
