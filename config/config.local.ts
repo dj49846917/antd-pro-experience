@@ -1,6 +1,6 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
-console.log("dev")
+console.log("local")
 export default defineConfig({
 
 });

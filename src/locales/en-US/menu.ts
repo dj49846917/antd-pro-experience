@@ -18,4 +18,6 @@ export default {
   'menu.template.table': 'table',
   'menu.template.table.tableradio': 'tableradio',
   'menu.template.table.mergecell': 'mergecell',
+  'menu.template.table.tablepaginationbefore': 'tablepaginationbefore',
+  'menu.template.table.tablepagination': 'tablepagination',
 };

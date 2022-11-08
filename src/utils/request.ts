@@ -81,6 +81,7 @@ Drequest.interceptors.request.use(async (url, options) => {
 
 // response拦截器, 处理response
 Drequest.interceptors.response.use(async (response, options) => {
+  console.log("response", response)
   const data = await response.clone().json();
   if (data.code === 401) {
     notification.error({

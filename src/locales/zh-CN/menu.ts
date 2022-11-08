@@ -18,4 +18,6 @@ export default {
   'menu.template.table': '表格',
   'menu.template.table.tableradio': '点击选中一条数据',
   'menu.template.table.mergecell': '合并单元格',
+  'menu.template.table.tablepaginationbefore': '表格分页(前端分)',
+  'menu.template.table.tablepagination': '表格分页(后端分)',
 };

@@ -73,6 +73,18 @@
             component: './template/table/MergeCell',
           },
           {
+            path: '/template/table/tablepaginationbefore',
+            name: 'tablepaginationbefore',
+            icon: 'smile',
+            component: './template/table/TablePaginationBefore',
+          },
+          {
+            path: '/template/table/tablepagination',
+            name: 'tablepagination',
+            icon: 'smile',
+            component: './template/table/TablePagination',
+          },
+          {
             component: './404',
           }
         ]

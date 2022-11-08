@@ -19,3 +19,13 @@ export interface TreeDataNode extends DataNode {
     value?: string,
     childdren?: any
 }
+// 通用接口返回数据格式
+export interface CommonResponseType {
+    code: number,
+    data: any,
+    message: string,
+    success: boolean,
+    timestamp: string,
+    traceId: string,
+    [key: string]: any
+}

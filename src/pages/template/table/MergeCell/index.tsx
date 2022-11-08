@@ -11,7 +11,7 @@ const mergeCells = (text: string, array: DataSource[], columns: string) => {
   if (text !== temp[columns]) {
     temp[columns] = text;
     array.forEach((item) => {
-      if (item.ClassifyNm === temp[columns]) {
+      if (item[columns] === temp[columns]) {
         i += 1;
       }
     });
