@@ -48,7 +48,7 @@ function TablePaginationBefore(props: Props) {
       render: (text: string, record: TableListType) => (
         <span>
           <Radio.Group value={activeKey} onChange={(e) => setActiveKey(e.target.value)}>
-            <Radio value={record.Uuid} />
+            <Radio value={record.id} />
           </Radio.Group>
         </span>
       )
@@ -101,11 +101,11 @@ function TablePaginationBefore(props: Props) {
         columns={columns}
         bordered
         loading={loading}
-        rowKey="Uuid"
+        rowKey="id"
         onChange={changePage}
         onRow={(record: TableListType) => ({
           onClick: () => {
-            setActiveKey(record.Uuid)
+            setActiveKey(record.id)
           }
         })}
       />

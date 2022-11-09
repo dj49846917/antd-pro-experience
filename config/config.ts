@@ -5,12 +5,16 @@ import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
-
+import env from './env';
+console.log('env', process.env.NODE_ENV)
 export default defineConfig({
   hash: true,
   antd: {},
   dva: {
     hmr: true,
+  },
+  history: {
+    type: 'hash'
   },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
@@ -45,6 +49,7 @@ export default defineConfig({
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
   esbuild: {},
+  publicPath: process.env.NODE_ENV === 'production' ? '/antd-pro-experience/' : '/',
   base: '/',
   title: false,
   ignoreMomentLocale: true,

@@ -85,6 +85,12 @@
             component: './template/table/TablePagination',
           },
           {
+            path: '/template/table/edittable',
+            name: 'edittable',
+            icon: 'smile',
+            component: './template/table/EditTable',
+          },
+          {
             component: './404',
           }
         ]

@@ -20,4 +20,5 @@ export default {
   'menu.template.table.mergecell': 'mergecell',
   'menu.template.table.tablepaginationbefore': 'tablepaginationbefore',
   'menu.template.table.tablepagination': 'tablepagination',
+  'menu.template.table.edittable': 'edittable',
 };

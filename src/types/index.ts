@@ -29,3 +29,10 @@ export interface CommonResponseType {
     traceId: string,
     [key: string]: any
 }
+
+export type EditTableSelectType = {
+    [key: string]: {
+        text: string,
+        status: string
+    }
+}

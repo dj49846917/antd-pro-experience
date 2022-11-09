@@ -12,7 +12,7 @@ export type TableListType = {
   ReportNm: string,
   ReportYearMonth: string,
   ReportCycleTypeCd: string,
-  Uuid: string
+  id: string
 }
 
 export type PageInfo = {
