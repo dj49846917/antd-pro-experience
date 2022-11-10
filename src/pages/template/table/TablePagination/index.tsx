@@ -1,4 +1,5 @@
 import tableApi from "@/services/table"
+import { DicType } from "@/types"
 import { PageContainer } from "@ant-design/pro-components"
 import { Radio, Table, TablePaginationConfig } from "antd"
 import { useEffect, useState } from "react"
@@ -9,6 +10,7 @@ type Props = {}
 function TablePaginationBefore(props: Props) {
   const [loading, setLoading] = useState(false)
   const [activeKey, setActiveKey] = useState("")
+  const [dicList, setDicList] = useState<DicType[]>([])
   const [dataSource, setDataSource] = useState<PageInfo>({
     list: [],
     total: 0,
@@ -16,14 +18,13 @@ function TablePaginationBefore(props: Props) {
     pageSize: 10
   })
   useEffect(() => {
-    setLoading(true)
     const params = {
       userId: "001",
       pageIndex: 1,
       pageSize: 10
     }
     initData(params)
-    setLoading(false)
+    initDic()
   }, [])
 
   const initData = async (params: TableListParamsBackType) => {
@@ -40,6 +41,20 @@ function TablePaginationBefore(props: Props) {
       })
     }
   }
+
+  const initDic = async () => {
+    const params = ['node_status', 'complate_condition']
+    const result = await tableApi.getDicList(params)
+    const newDicList = result.data.map((item: DicType) => {
+      return {
+        ...item,
+        label: item.constantKey,
+        value: item.constantValue
+      }
+    })
+    setDicList(newDicList)
+  }
+
   const columns = [
     {
       title: '选择',
@@ -57,6 +72,10 @@ function TablePaginationBefore(props: Props) {
       title: '财务报表类型',
       dataIndex: 'ReportNm',
       key: 'ReportNm',
+      render: (text: string) => {
+        const list = dicList.filter(x => (x.constantValue === text && x.parentId === 'node_status'))
+        return list.length > 0 ? list[0].constantKey : ''
+      }
     },
     {
       title: '报表时间',
@@ -67,6 +86,10 @@ function TablePaginationBefore(props: Props) {
       title: '报表周期类型',
       dataIndex: 'ReportCycleTypeCd',
       key: 'ReportCycleTypeCd',
+      render: (text: string) => {
+        const list = dicList.filter(x => (x.constantValue === text && x.parentId === 'complate_condition'))
+        return list.length > 0 ? list[0].constantKey : ''
+      }
     },
   ]
 

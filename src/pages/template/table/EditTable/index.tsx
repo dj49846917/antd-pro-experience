@@ -44,7 +44,8 @@ function EditTable() {
   const formRef = useRef<ProFormInstance<any>>();
   const editorFormRef = useRef<EditableFormInstance<TableListType>>();
   const [loading, setLoading] = useState(false)
-  const [dicList, setDicList] = useState<EditTableSelectType>({})
+  const [reportNmOp, setReportNmOp] = useState<EditTableSelectType>({})
+  const [reportCycleTypeCdOp, setReportCycleTypeCdOp] = useState<EditTableSelectType>({})
   const [dataSource, setDataSource] = useState<TableListType[]>([])
 
   useEffect(() => {
@@ -70,21 +71,32 @@ function EditTable() {
     }
   }
 
-  const initDic = () => {
-    const result: DicType[] = [
-      { id: "001", constantKey: "资产负债表", constantValue: '001', parentId: '1' },
-      { id: "002", constantKey: "利润及利润分配表", constantValue: '002', parentId: '2' },
-      { id: "003", constantKey: "现金流量表", constantValue: '003', parentId: '3' },
-      { id: "004", constantKey: "财务指标表", constantValue: '004', parentId: '4' },
-    ]
+  const initDic = async () => {
+    const params = ['node_status', 'complate_condition']
+    const result = await tableApi.getDicList(params)
+    const reportCycleTypeCdOpList: DicType[] = []
+    const reportNmOpList: DicType[] = []
+    result.data.forEach((item: DicType) => {
+      if (item.parentId === 'node_status') {
+        reportNmOpList.push(item)
+      }
+      if (item.parentId === 'complate_condition') {
+        reportCycleTypeCdOpList.push(item)
+      }
+    })
+    getCommonOptions(reportNmOpList, setReportNmOp)
+    getCommonOptions(reportCycleTypeCdOpList, setReportCycleTypeCdOp)
+  }
+
+  const getCommonOptions = (arr: DicType[], action: React.Dispatch<React.SetStateAction<EditTableSelectType>>) => {
     let obj: EditTableSelectType = {}
-    result.forEach(item => {
+    arr.forEach(item => {
       obj[item.constantValue] = {
         text: item.constantKey,
         status: item.constantValue
       }
     })
-    setDicList(obj)
+    action(obj)
   }
 
   const columns: ProColumns<TableListType>[] = [
@@ -92,7 +104,7 @@ function EditTable() {
       title: '财务报表类型',
       dataIndex: 'ReportNm',
       valueType: 'select',
-      valueEnum: dicList,
+      valueEnum: reportNmOp,
       formItemProps: () => {
         return {
           rules: [{ required: true, message: '此项为必填项' }],
@@ -112,6 +124,8 @@ function EditTable() {
     {
       title: '报表周期类型',
       dataIndex: 'ReportCycleTypeCd',
+      valueType: 'select',
+      valueEnum: reportCycleTypeCdOp,
       formItemProps: () => {
         return {
           rules: [{ required: true, message: '此项为必填项' }],

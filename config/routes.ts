@@ -91,6 +91,12 @@
             component: './template/table/EditTable',
           },
           {
+            path: '/template/table/comprehensivetable',
+            name: 'comprehensivetable',
+            icon: 'smile',
+            component: './template/table/ComprehensiveTable',
+          },
+          {
             component: './404',
           }
         ]
