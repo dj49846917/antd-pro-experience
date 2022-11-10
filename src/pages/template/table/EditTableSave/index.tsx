@@ -10,36 +10,7 @@ import { TableListType } from '../TablePaginationBefore/type';
 import tableApi from '@/services/table';
 import { DicType, EditTableSelectType } from '@/types';
 
-// type DataSourceType = {
-//   id: React.Key;
-//   title?: string;
-//   decs?: string;
-//   state?: string;
-//   created_at?: any;
-//   update_at?: string;
-//   children?: DataSourceType[];
-// };
-
-// const defaultData: DataSourceType[] = [
-//   {
-//     id: '624748504',
-//     title: '活动名称一',
-//     decs: '这个活动真好玩',
-//     state: 'open',
-//     created_at: moment(1590486176000),
-//     update_at: '1590486176000',
-//   },
-//   {
-//     id: '624691229',
-//     title: '活动名称二',
-//     decs: '这个活动真好玩',
-//     state: 'closed',
-//     created_at: moment(1590481162000),
-//     update_at: '1590481162000',
-//   },
-// ];
-
-function EditTable() {
+function EditTableSave() {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() => []);
   const formRef = useRef<ProFormInstance<any>>();
   const editorFormRef = useRef<EditableFormInstance<TableListType>>();
@@ -66,6 +37,11 @@ function EditTable() {
           ReportYearMonth: item.ReportYearMonth ? moment(item.ReportYearMonth) : null
         }
       })
+      /*------------ 核心代码 ---------------*/
+      setEditableRowKeys(() => {
+        return result.data.list.map((item: TableListType) => item.id);
+      })
+      /*------------ 核心代码 ---------------*/
       setDataSource(result.data.list)
     }
   }
@@ -204,6 +180,9 @@ function EditTable() {
             type: 'multiple',
             editableKeys,
             onChange: setEditableRowKeys,
+            onValuesChange: (record, recordList) => {
+              setDataSource(recordList);
+            },
             actionRender: (row, config, defaultDom) => {
               return [
                 defaultDom.save,
@@ -217,4 +196,4 @@ function EditTable() {
   );
 };
 
-export default EditTable
+export default EditTableSave

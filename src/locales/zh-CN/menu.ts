@@ -21,4 +21,5 @@ export default {
   'menu.template.table.tablepaginationbefore': '表格分页(前端分)',
   'menu.template.table.tablepagination': '表格分页(后端分)',
   'menu.template.table.edittable': '可编辑表格',
+  'menu.template.table.edittablesave': '可编辑表格(实时)',
 };
