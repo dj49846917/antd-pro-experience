@@ -7,9 +7,9 @@ import {
   PageInfo,
   TableListParamsBackType,
 } from '@/pages/template/table/TablePaginationBefore/type';
-import normalModalInfo from '../../modal/NormalModal/data';
 import { UploadOutlined } from '@ant-design/icons';
 import { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import normalModalInfo from '@/pages/template/modal/NormalModal/data';
 
 function UploadComponent() {
   const [loading, setLoading] = useState(false);

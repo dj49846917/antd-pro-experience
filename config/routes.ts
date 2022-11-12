@@ -117,17 +117,43 @@
         component: './template/other/TurnToPage',
       },
       {
-        path: '/template/other/upload',
-        name: 'upload',
-        icon: 'smile',
-        component: './template/other/Upload',
-      },
-      {
         path: '/template/other/targetpage',
         name: 'targetpage',
         icon: 'smile',
         component: './template/other/TurnToPage/Target',
         hideInMenu: true,
+      },
+      {
+        path: '/template/other/formcheck',
+        name: 'formcheck',
+        icon: 'smile',
+        component: './template/other/FormCheck',
+      },
+      {
+        path: '/template/other/layout',
+        name: 'layout',
+        icon: 'smile',
+        component: './template/other/Layout',
+      },
+      {
+        path: '/template/other/upload',
+        name: 'upload',
+        icon: 'smile',
+        routes: [
+          {
+            path: '/template/other/upload',
+            redirect: '/template/other/upload/manual',
+          },
+          {
+            path: '/template/other/upload/manual',
+            name: 'manual',
+            icon: 'smile',
+            component: './template/other/Upload/Manual',
+          },
+          {
+            component: './404',
+          }
+        ]
       },
       {
         component: './404',
