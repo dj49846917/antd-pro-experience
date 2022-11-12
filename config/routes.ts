@@ -42,8 +42,8 @@
       },
       {
         component: './404',
-      }
-    ]
+      },
+    ],
   },
   {
     path: '/template/table',
@@ -98,8 +98,8 @@
       },
       {
         component: './404',
-      }
-    ]
+      },
+    ],
   },
   {
     path: '/template/other',
@@ -127,12 +127,12 @@
         name: 'targetpage',
         icon: 'smile',
         component: './template/other/TurnToPage/Target',
-        hideInMenu: true
+        hideInMenu: true,
       },
       {
         component: './404',
-      }
-    ]
+      },
+    ],
   },
 
   // {

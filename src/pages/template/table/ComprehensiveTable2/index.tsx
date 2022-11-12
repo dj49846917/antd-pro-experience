@@ -4,9 +4,9 @@ import { PageContainer } from "@ant-design/pro-components"
 import { Button, Divider, Form, message, Popconfirm, Table, TablePaginationConfig } from "antd"
 import { useEffect, useState } from "react"
 import { PageInfo, TableListParamsBackType, TableListType } from "../TablePaginationBefore/type"
-import Detail from "./Detail"
 import { DicType } from '@/types'
 import moment from "moment"
+import Detail from "./Detail"
 
 function ComprehensiveTable2() {
   const [loading, setLoading] = useState(false)
