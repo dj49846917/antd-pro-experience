@@ -111,7 +111,7 @@ function Layout() {
                   <Input placeholder='请输入' />
                 </Form.Item>
               </Col>
-              <Col {...getColLayout(3, 2)}>
+              <Col {...getColLayout(3, 0)}>
                 <Form.Item
                   label="指标J"
                   name="countJ"

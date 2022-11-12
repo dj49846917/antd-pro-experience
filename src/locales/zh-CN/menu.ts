@@ -16,7 +16,7 @@ export default {
   'menu.other.turntopage': '跳转页面',
   'menu.other.targetpage': '目标页面',
   'menu.other.upload': '上传',
-  'menu.other.formcheck': '自定义校验',
+  'menu.other.formcheck': 'Form自定义校验',
   'menu.other.layout': '栅格布局',
   'menu.other.upload.manual': '上传组件传参数',
   'menu.table': '表格',
