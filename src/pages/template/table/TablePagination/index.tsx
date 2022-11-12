@@ -7,7 +7,7 @@ import { PageInfo, TableListParamsBackType, TableListType } from "../TablePagina
 
 type Props = {}
 
-function TablePaginationBefore(props: Props) {
+function TablePagination(props: Props) {
   const [loading, setLoading] = useState(false)
   const [activeKey, setActiveKey] = useState("")
   const [dicList, setDicList] = useState<DicType[]>([])
@@ -136,4 +136,4 @@ function TablePaginationBefore(props: Props) {
   )
 }
 
-export default TablePaginationBefore
+export default TablePagination

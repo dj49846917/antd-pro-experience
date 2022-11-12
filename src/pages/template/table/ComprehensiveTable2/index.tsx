@@ -2,15 +2,24 @@ import tableApi from "@/services/table"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { PageContainer } from "@ant-design/pro-components"
 import { Button, Divider, Form, message, Popconfirm, Table, TablePaginationConfig } from "antd"
-import { useEffect, useReducer, useState } from "react"
+import { useEffect, useState } from "react"
 import { PageInfo, TableListParamsBackType, TableListType } from "../TablePaginationBefore/type"
-import { ActionType, ComprehensiveTableContext, initialState, reducer } from "./context"
 import Detail from "./Detail"
 import { DicType } from '@/types'
 import moment from "moment"
 
-function ComprehensiveTable() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+function ComprehensiveTable2() {
+  const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [dicList, setDicList] = useState<DicType[]>([])
+  const [activeRow, setActiveRow] = useState<TableListType>({} as TableListType)
+  const [activeType, setActiveType] = useState<'add' | 'edit'>('add')
+  const [dataSource, setDataSource] = useState<PageInfo>({
+    list: [],
+    total: 0,
+    current: 1,
+    pageSize: 10
+  })
   const [form] = Form.useForm()
   useEffect(() => {
     const params = {
@@ -23,21 +32,15 @@ function ComprehensiveTable() {
   }, [])
 
   const initData = async (params: TableListParamsBackType) => {
-    dispatch({ type: ActionType.changeLoading, payload: { ...state, loading: true } })
+    setLoading(true)
     const result = await tableApi.getList(params)
-    dispatch({ type: ActionType.changeLoading, payload: { ...state, loading: false } })
+    setLoading(false)
     if (result && result.success) {
-      dispatch({
-        type: ActionType.changeDataSource,
-        payload: {
-          ...state,
-          dataSource: {
-            list: result.data.list,
-            total: result.data.total,
-            current: result.data.current,
-            pageSize: result.data.pageSize
-          }
-        }
+      setDataSource({
+        list: result.data.list,
+        total: result.data.total,
+        current: result.data.current,
+        pageSize: result.data.pageSize
       })
     }
   }
@@ -52,12 +55,12 @@ function ComprehensiveTable() {
         value: item.constantValue
       }
     })
-    dispatch({ type: ActionType.changeDicList, payload: { ...state, dicList: newDicList } })
+    setDicList(newDicList)
   }
 
   const showTotal = () => {
-    const totalPage = Math.ceil(state.dataSource.total / state.dataSource.pageSize);
-    return `总共${state.dataSource.total}条数据,第${state.dataSource.current}/${totalPage}页`
+    const totalPage = Math.ceil(dataSource.total / dataSource.pageSize);
+    return `总共${dataSource.total}条数据,第${dataSource.current}/${totalPage}页`
   }
 
   const changePage = (page: TablePaginationConfig) => {
@@ -70,25 +73,26 @@ function ComprehensiveTable() {
   }
 
   // 操作按钮
-  const action = (actionType: 'add' | 'edit', record?: TableListType) => {
-    if (actionType === 'add') {
-      dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: true } })
+  const action = (activeType: 'add' | 'edit', record?: TableListType) => {
+    setActiveType(activeType)
+    if (activeType === 'add') {
+      setVisible(true)
     }
-    if (actionType === 'edit') {
-      dispatch({ type: ActionType.changeVisible, payload: { ...state, visible: true } })
+    if (activeType === 'edit') {
+      setVisible(true)
       console.log('record', record)
       if (record?.ReportYearMonth) {
         (record.ReportYearMonth as any) = moment(record?.ReportYearMonth)
       }
-      dispatch({ type: ActionType.changeActiveRow, payload: { ...state, activeRow: record as TableListType } })
+      setActiveRow(record as TableListType)
       form.setFieldsValue(record)
     }
   }
   // 删除按钮
   const deleteAction = async (record: TableListType) => {
-    dispatch({ type: ActionType.changeLoading, payload: { ...state, loading: true } })
+    setLoading(true)
     const result = await tableApi.deleteList(record.id)
-    dispatch({ type: ActionType.changeLoading, payload: { ...state, loading: false } })
+    setLoading(false)
     if (result && result.success) {
       message.success("删除成功")
       const params = {
@@ -106,7 +110,7 @@ function ComprehensiveTable() {
       dataIndex: 'ReportNm',
       key: 'ReportNm',
       render: (text: string) => {
-        const list = state.dicList.filter(x => (x.constantValue === text && x.parentId === 'node_status'))
+        const list = dicList.filter(x => (x.constantValue === text && x.parentId === 'node_status'))
         return list.length > 0 ? list[0].constantKey : ''
       }
     },
@@ -120,7 +124,7 @@ function ComprehensiveTable() {
       dataIndex: 'ReportCycleTypeCd',
       key: 'ReportCycleTypeCd',
       render: (text: string) => {
-        const list = state.dicList.filter(x => (x.constantValue === text && x.parentId === 'complate_condition'))
+        const list = dicList.filter(x => (x.constantValue === text && x.parentId === 'complate_condition'))
         return list.length > 0 ? list[0].constantKey : ''
       }
     },
@@ -142,28 +146,36 @@ function ComprehensiveTable() {
   return (
     <PageContainer
     >
-      <ComprehensiveTableContext.Provider value={{ state, dispatch }}>
-        <Button type="primary" onClick={() => action('add')}>新增</Button>
-        <Table
-          pagination={{
-            total: state.dataSource.total,
-            current: state.dataSource.current,
-            pageSize: state.dataSource.pageSize,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal,
-          }}
-          dataSource={state.dataSource.list}
-          columns={columns}
-          bordered
-          loading={state.loading}
-          rowKey="id"
-          onChange={changePage}
-        />
-        <Detail form={form} initData={initData} />
-      </ComprehensiveTableContext.Provider>
+      <Button type="primary" onClick={() => action('add')}>新增</Button>
+      <Table
+        pagination={{
+          total: dataSource.total,
+          current: dataSource.current,
+          pageSize: dataSource.pageSize,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal,
+        }}
+        dataSource={dataSource.list}
+        columns={columns}
+        bordered
+        loading={loading}
+        rowKey="id"
+        onChange={changePage}
+      />
+      <Detail
+        activeRow={activeRow}
+        form={form}
+        initData={initData}
+        loading={loading}
+        visible={visible}
+        changeVisible={setVisible}
+        changeLoading={setLoading}
+        activeType={activeType}
+        dicList={dicList}
+      />
     </PageContainer>
   )
 }
 
-export default ComprehensiveTable
+export default ComprehensiveTable2
