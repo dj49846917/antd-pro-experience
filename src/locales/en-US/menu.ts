@@ -26,6 +26,7 @@ export default {
   'menu.table.tablepaginationbefore': 'tablepaginationbefore',
   'menu.table.tablepagination': 'tablepagination',
   'menu.table.edittable': 'edittable',
+  'menu.table.edittablesave': 'edittablesave',
   'menu.table.comprehensivetable': 'comprehensivetable',
   'menu.table.comprehensivetable2': 'comprehensivetable2',
   'menu.test': 'test',

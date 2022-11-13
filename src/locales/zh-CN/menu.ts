@@ -25,6 +25,7 @@ export default {
   'menu.table.tablepaginationbefore': '表格分页(前端分)',
   'menu.table.tablepagination': '表格分页(后端分)',
   'menu.table.edittable': '可编辑表格',
+  'menu.table.edittablesave': '可编辑表格(实时保存)',
   'menu.table.comprehensivetable': '综合(数据管理)',
   'menu.table.comprehensivetable2': '综合(父子)',
   'menu.test': '测试',

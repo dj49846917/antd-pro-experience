@@ -85,6 +85,12 @@
         component: './template/table/EditTable',
       },
       {
+        path: '/template/table/edittablesave',
+        name: 'edittablesave',
+        icon: 'smile',
+        component: './template/table/EditTableSave',
+      },
+      {
         path: '/template/table/comprehensivetable',
         name: 'comprehensivetable',
         icon: 'smile',
