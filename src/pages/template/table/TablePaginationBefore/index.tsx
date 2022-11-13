@@ -52,6 +52,21 @@ function TablePaginationBefore(props: Props) {
     setDicList(newDicList)
   }
 
+  const showTotal = () => {
+    const totalPage = Math.ceil(dataSource.total / dataSource.pageSize);
+    return `总共${dataSource.total}条数据,第${dataSource.current}/${totalPage}页`
+  }
+
+  const changePage = (page: TablePaginationConfig) => {
+    setDataSource((info) => {
+      return {
+        ...info,
+        current: page.current as number,
+        pageSize: page.pageSize as number
+      }
+    })
+  }
+
   const columns = [
     {
       title: '选择',
@@ -89,21 +104,6 @@ function TablePaginationBefore(props: Props) {
       }
     },
   ]
-
-  const showTotal = () => {
-    const totalPage = Math.ceil(dataSource.total / dataSource.pageSize);
-    return `总共${dataSource.total}条数据,第${dataSource.current}/${totalPage}页`
-  }
-
-  const changePage = (page: TablePaginationConfig) => {
-    setDataSource((info) => {
-      return {
-        ...info,
-        current: page.current as number,
-        pageSize: page.pageSize as number
-      }
-    })
-  }
 
   return (
     <PageContainer

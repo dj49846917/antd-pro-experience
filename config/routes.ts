@@ -61,6 +61,12 @@
         component: './template/table/TableRadio',
       },
       {
+        path: '/template/table/tablecheckbox',
+        name: 'tablecheckbox',
+        icon: 'smile',
+        component: './template/table/TableCheckbox',
+      },
+      {
         path: '/template/table/mergecell',
         name: 'mergecell',
         icon: 'smile',
@@ -140,6 +146,29 @@
         name: 'layout',
         icon: 'smile',
         component: './template/other/Layout',
+      },
+      {
+        path: '/template/other/export',
+        name: 'export',
+        icon: 'smile',
+        routes: [
+          {
+            path: '/template/other/export',
+            redirect: '/template/other/export/datatoexcel',
+          },
+          {
+            path: '/template/other/export/datatoexcel',
+            name: 'datatoexcel',
+            icon: 'smile',
+            component: './template/other/Export/DataToExcel',
+          },
+          {
+            path: '/template/other/export/downloadtemplate',
+            name: 'downloadtemplate',
+            icon: 'smile',
+            component: './template/other/Export/DownloadTemplate',
+          },
+        ]
       },
       {
         path: '/template/other/upload',

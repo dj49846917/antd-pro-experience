@@ -1,13 +1,15 @@
 import tableApi from "@/services/table"
 import { DicType } from "@/types"
 import { PageContainer } from "@ant-design/pro-components"
-import { Radio, Table, TablePaginationConfig } from "antd"
+import { Button, Radio, Table, TablePaginationConfig } from "antd"
 import { useEffect, useState } from "react"
-import { PageInfo, TableListParamsBackType, TableListType } from "../TablePaginationBefore/type"
+import { PageInfo, TableListParamsBackType, TableListType } from "@/pages/template/table/TablePaginationBefore/type"
+import * as XLSX from 'xlsx';
+import { commonExportStyle, openDownloadDialog, workbook2blob } from "../utils"
 
 type Props = {}
 
-function TablePagination(props: Props) {
+function DataToExcel(props: Props) {
   const [loading, setLoading] = useState(false)
   const [activeKey, setActiveKey] = useState("")
   const [dicList, setDicList] = useState<DicType[]>([])
@@ -68,6 +70,15 @@ function TablePagination(props: Props) {
     initData(params)
   }
 
+  const exportList = () => {
+    const sheet1 = XLSX.utils.json_to_sheet(dataSource.list); // 设置数据
+    commonExportStyle(sheet1, 6);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, sheet1);
+    const workbookBlob = workbook2blob(wb);
+    openDownloadDialog(workbookBlob, `${Date.now()}.xlsx`);
+  }
+
   const columns = [
     {
       title: '选择',
@@ -110,6 +121,7 @@ function TablePagination(props: Props) {
     <PageContainer
       loading={loading}
     >
+      <Button type="primary" onClick={exportList}>导出</Button>
       <Table
         pagination={{
           total: dataSource.total,
@@ -135,4 +147,18 @@ function TablePagination(props: Props) {
   )
 }
 
-export default TablePagination
+export default DataToExcel
+
+/**
+ * 直接设置数据
+ * const sheet1 = XLSX.utils.json_to_sheet(dataSource.list);
+ * 
+ * 先设置标题
+ *  const titleList = columns.map(item=>{
+      return item.title
+    })
+    const sheet1 = XLSX.utils.json_to_sheet([]);
+    XLSX.utils.sheet_add_aoa(sheet1, [titleList], { origin: "A1" }); // 添加标题
+    XLSX.utils.sheet_add_json(sheet1, dataSource.list, { origin: "A2" }); // 添加内容
+ * 
+ */

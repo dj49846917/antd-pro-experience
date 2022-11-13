@@ -162,7 +162,6 @@ function EditTable() {
 
   const saveAction = async (form: FormInstance<any> | undefined) => {
     const result = await form?.validateFields()
-    console.log("result", result)
     if (result) {
       console.log("保存")
     }
