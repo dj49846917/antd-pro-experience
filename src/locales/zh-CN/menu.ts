@@ -27,4 +27,6 @@ export default {
   'menu.table.edittable': '可编辑表格',
   'menu.table.comprehensivetable': '综合(数据管理)',
   'menu.table.comprehensivetable2': '综合(父子)',
+  'menu.test': '测试',
+  'menu.test.customform': '自定义表单'
 };

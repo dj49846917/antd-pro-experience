@@ -160,16 +160,26 @@
       },
     ],
   },
-
-  // {
-  //   path: '/template',
-  //   name: 'template',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   routes: [
-
-  //   ],
-  // },
+  {
+    path: '/test',
+    name: 'test',
+    icon: 'home',
+    routes: [
+      {
+        path: '/test',
+        redirect: '/test/customform',
+      },
+      {
+        path: '/test/customform',
+        name: 'customform',
+        icon: 'smile',
+        component: './test/CustomForm',
+      },
+      {
+        component: './404',
+      },
+    ]
+  },
   {
     path: '/',
     redirect: '/template/modal',

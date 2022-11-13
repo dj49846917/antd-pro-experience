@@ -90,7 +90,7 @@ export function getFormLayout(columnLayout: number, position: number = 1) {
           xs: { span: 24 },
           sm: { span: 4 },
           md: { span: 4 },
-          xl: { span: 10 },
+          xl: { span: 9 },
           xxl: { span: 10 }
         },
         wrapperCol: {

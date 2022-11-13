@@ -38,13 +38,14 @@ ol {
     width: 100%;
     overflow-x: auto;
 
-    &-thead > tr,
-    &-tbody > tr {
-      > th,
-      > td {
+    &-thead>tr,
+    &-tbody>tr {
+
+      >th,
+      >td {
         white-space: pre;
 
-        > span {
+        >span {
           display: block;
         }
       }
@@ -53,8 +54,9 @@ ol {
 }
 
 // Compatible with IE11
-@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
-  body .ant-design-pro > .ant-layout {
+@media screen and(-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+  body .ant-design-pro>.ant-layout {
     min-height: 100vh;
   }
 }
@@ -72,5 +74,59 @@ ol {
 
   .ant-btn.ant-btn-default {
     width: 100%;
+  }
+}
+
+.ant-input-number.ant-input-number-in-form-item {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .form-spec {
+    >.ant-row.ant-form-item-row {
+      >.ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-4.ant-col-md-4.ant-col-xl-9.ant-col-xxl-10 {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .form-spec {
+    >.ant-row.ant-form-item-row {
+      >.ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-4.ant-col-md-4.ant-col-xl-9.ant-col-xxl-10 {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .form-spec {
+    >.ant-row.ant-form-item-row {
+      >.ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-4.ant-col-md-4.ant-col-xl-9.ant-col-xxl-10 {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .form-spec {
+    >.ant-row.ant-form-item-row {
+      >.ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-4.ant-col-md-4.ant-col-xl-9.ant-col-xxl-10 {
+        margin-left: 2.5%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .form-spec {
+    >.ant-row.ant-form-item-row {
+      >.ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-4.ant-col-md-4.ant-col-xl-9.ant-col-xxl-10 {
+        margin-left: 2.5%;
+      }
+    }
   }
 }

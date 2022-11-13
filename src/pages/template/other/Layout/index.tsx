@@ -92,7 +92,6 @@ function Layout() {
             <Row>
               <Col {...getColLayout(3, 1)}>
                 <Form.Item
-                  style={{ marginLeft: '10px' }}
                   label="指标H"
                   name="countH"
                   rules={[{ required: true, message: '请输入' }]}

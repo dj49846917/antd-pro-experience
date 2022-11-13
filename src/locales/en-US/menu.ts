@@ -28,4 +28,6 @@ export default {
   'menu.table.edittable': 'edittable',
   'menu.table.comprehensivetable': 'comprehensivetable',
   'menu.table.comprehensivetable2': 'comprehensivetable2',
+  'menu.test': 'test',
+  'menu.test.customform': 'customform'
 };
