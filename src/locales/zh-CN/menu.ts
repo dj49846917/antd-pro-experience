@@ -15,6 +15,7 @@ export default {
   'menu.other': '其他',
   'menu.other.export': '导出',
   'menu.other.export.datatoexcel': '数据转excel',
+  'menu.other.export.stringtoexcel': '流转excel',
   'menu.other.export.downloadtemplate': '下载模板',
   'menu.other.turntopage': '跳转页面',
   'menu.other.targetpage': '目标页面',

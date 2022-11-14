@@ -20,6 +20,7 @@ export default {
   'menu.other.layout': 'layout',
   'menu.other.export': 'export',
   'menu.other.export.datatoexcel': 'Data To Excel',
+  'menu.other.export.stringtoexcel': 'String To Excel',
   'menu.other.export.downloadtemplate': 'DownloadTemplate',
   'menu.other.upload.manual': 'manual upload',
   'menu.other.formcheck': 'formcheck',

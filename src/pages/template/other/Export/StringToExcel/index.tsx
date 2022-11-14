@@ -6,8 +6,28 @@ import { useEffect, useState } from "react"
 import { PageInfo, TableListParamsBackType, TableListType } from "@/pages/template/table/TablePaginationBefore/type"
 import * as XLSX from 'xlsx';
 import { commonExportStyle, openDownloadDialog, workbook2blob } from "../utils"
+import axios from "axios"
 
 type Props = {}
+
+export const openExcel = (result: any, fileName?: string) => {
+  const blob = new Blob([result], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  }) // for .xlsx files
+  // 通过URL.createObjectURL生成文件路径
+  const url = window.URL.createObjectURL(blob)
+  // 创建a标签
+  const ele = document.createElement("a")
+  ele.style.display = 'none'
+  // 设置href属性为文件路径，download属性可以设置文件名称
+  ele.href = url
+  ele.download = fileName ? fileName : '测试文件'
+  // 将a标签添加到页面并模拟点击
+  document.querySelectorAll("body")[0].appendChild(ele)
+  ele.click()
+  // 移除a标签
+  ele.remove()
+}
 
 function DownloadTemplate(props: Props) {
   const [loading, setLoading] = useState(false)
@@ -83,23 +103,19 @@ function DownloadTemplate(props: Props) {
     openDownloadDialog(workbookBlob, `${Date.now()}.xlsx`);
   }
 
-  const exportList = () => {
-    let list = dataSource.list
-    if (activeKey) {
-      list = dataSource.list.filter(x => x.id === activeKey)
-    }
-    const sheet1 = XLSX.utils.json_to_sheet(list); // 设置数据
-    // const titleList = columns.map(item=>{
-    //   return item.title
-    // })
-    // const sheet1 = XLSX.utils.json_to_sheet([]);
-    // XLSX.utils.sheet_add_aoa(sheet1, [titleList], { origin: "A1" }); // 添加标题
-    // XLSX.utils.sheet_add_json(sheet1, dataSource.list, { origin: "A2" }); // 添加内容
-    commonExportStyle(sheet1, 6);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, sheet1);
-    const workbookBlob = workbook2blob(wb);
-    openDownloadDialog(workbookBlob, `${Date.now()}.xlsx`);
+  const exportList = async () => {
+    const result = await axios({
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("loginToken")}`,
+      },
+      responseType: 'blob',
+      data: JSON.stringify({ "appId": "", "data": {}, "lang": "cn", "operator": "", "source": "PC", "traceId": "", "version": "1" }),
+      url: `https://bdhtesthk.tax.deloitte.com.cn/fssc-mdm/segmentEnumValue/export`,
+      method: "post",
+    })
+    openExcel(result.data)
   }
 
   const columns = [
@@ -172,17 +188,40 @@ function DownloadTemplate(props: Props) {
 }
 
 export default DownloadTemplate
+// General
+// Request URL: https://bdhtesthk.tax.deloitte.com.cn/fssc-mdm/segmentEnumValue/export
+// Request Method: POST
+// Status Code: 200 OK
+// Remote Address: 203.107.54.190:443
+// Referrer Policy: strict-origin-when-cross-origin
 
-/**
- * 直接设置数据
- * const sheet1 = XLSX.utils.json_to_sheet(dataSource.list);
- * 
- * 先设置标题
- *  const titleList = columns.map(item=>{
-      return item.title
-    })
-    const sheet1 = XLSX.utils.json_to_sheet([]);
-    XLSX.utils.sheet_add_aoa(sheet1, [titleList], { origin: "A1" }); // 添加标题
-    XLSX.utils.sheet_add_json(sheet1, dataSource.list, { origin: "A2" }); // 添加内容
- * 
- */
+// Response Headers
+// Access-Control-Allow-Credentials: true
+// Access-Control-Allow-Origin: http://localhost:8000
+// Connection: keep-alive
+// Content-disposition: attachment;filename=export.xlsx
+// Content-Type: application/vnd.ms-excel; charset=UTF-8
+// Date: Mon, 14 Nov 2022 14:16:31 GMT
+// Set-Cookie: aliyungf_tc=09ec8ef139102e12633e720a7b0d1396d7dd27df5494d4b568b4684620ad70f4; Path=/; HttpOnly
+// Strict-Transport-Security: max-age=31536000
+// Transfer-Encoding: chunked
+// Vary: Origin
+
+// Request Headers
+// Accept: application/json
+// Accept-Encoding: gzip, deflate, br
+// Accept-Language: zh-CN,zh;q=0.9
+// Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhYmJ5Y2hlbkBkZWxvaXR0ZS5jb20uY24iLCJzY29wZSI6WyJhbGwiXSwiZnVsbE5hbWUiOiJhYmJ5Y2hlbiIsImV4cCI6MTY2ODQzODA2MiwidXNlcklkIjoiMTAxMzg3MTQ4NjIyMTEzMTc3NiIsImF1dGhvcml0aWVzIjpbImJhc2UiXSwianRpIjoiMzMwZTNlMzYtZWZjNS00ZGNiLWFkYWMtMTM5OWMzNmRiOGE2IiwiZW1haWwiOiJhYmJ5Y2hlbkBkZWxvaXR0ZS5jb20uY24iLCJrZXkiOiJCREgxMDEzODcxNDg2MjIxMTMxNzc2UENwODgzU3p3d3JUIiwiY2xpZW50X2lkIjoiYmRoLWZzc2MifQ.ZBwhcbpn0CAeKoKZdfq5LJRlm9-DCUBXEvSxnIjm3GRMPEvQq-ayNE0Wj19a6IN3H9RYX1Jq8dJM7bb0WcIDl7I_z3uRShQpPTK5J-5lGpoPBEr1pLyU1PN3LQejy5uPce6iM38jojMRbhCul4JjIuRzyEBY9VjbD_p3-eSCCyxMX8BUCs4HWJAwA1dDp51Knbb69pRylwNP8S86k2WyHLmsL7d4ftyZe98PeJTvtr4kxv8Zj0ihDaDvqMRk3YmkTB9YP5um-xghtF3FqOnt-k9GhyjlfyNFnxe7jhAgkB1rQdVGRE1olh4WOGJaMRctt6Eo-wioJWLWUuTFjvY3TQ
+// Connection: keep-alive
+// Content-Length: 89
+// Content-Type: application/json
+// Host: bdhtesthk.tax.deloitte.com.cn
+// Origin: http://localhost:8000
+// Referer: http://localhost:8000/
+// sec-ch-ua: "Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"
+// sec-ch-ua-mobile: ?0
+// sec-ch-ua-platform: "Windows"
+// Sec-Fetch-Dest: empty
+// Sec-Fetch-Mode: cors
+// Sec-Fetch-Site: cross-site
+// User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36

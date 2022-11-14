@@ -168,6 +168,12 @@
             icon: 'smile',
             component: './template/other/Export/DownloadTemplate',
           },
+          {
+            path: '/template/other/export/stringtoexcel',
+            name: 'stringtoexcel',
+            icon: 'smile',
+            component: './template/other/Export/StringToExcel',
+          },
         ]
       },
       {
