@@ -17,6 +17,10 @@ declare module 'mockjs';
 declare module 'react-fittext';
 declare module 'bizcharts-plugin-slider';
 declare module 'xlsx-style';
+declare module 'bpmn-js';
+declare module 'bpmn-js/lib/Modeler';
+declare module 'bpmn-js-properties-panel';
+declare module 'diagram-js/lib/navigation/movecanvas';
 
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design Dedicated environment variable, please do not use it in your project.

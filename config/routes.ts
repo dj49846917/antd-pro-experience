@@ -202,6 +202,29 @@
     ],
   },
   {
+    path: '/template/bpmn',
+    name: 'bpmn',
+    icon: 'smile',
+    routes: [
+      {
+        path: '/template/bpmn',
+        redirect: '/template/bpmn/base',
+      },
+      {
+        path: '/template/bpmn/base',
+        name: 'base',
+        icon: 'smile',
+        component: './template/bpmn/Base',
+      },
+      {
+        path: '/template/bpmn/Viewer',
+        name: 'viewer',
+        icon: 'smile',
+        component: './template/bpmn/Viewer',
+      }
+    ]
+  },
+  {
     path: '/test',
     name: 'test',
     icon: 'home',
