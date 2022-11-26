@@ -26,6 +26,7 @@ export default {
   'menu.bpmn': '流程图',
   'menu.bpmn.base': '基础流程图',
   'menu.bpmn.viewer': '流程图展示',
+  'menu.bpmn.custompanel': '自定义面板',
   'menu.table': '表格',
   'menu.table.tableradio': '单选',
   'menu.table.tablecheckbox': '复选',

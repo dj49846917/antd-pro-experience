@@ -55,7 +55,7 @@
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-components": "^1.1.1",
     "@umijs/route-utils": "^2.0.0",
-    "antd": "^4.20.0",
+    "antd": "^4.24.0",
     "axios": "^1.1.3",
     "bpmn-js": "^10.3.0",
     "bpmn-js-properties-panel": "^1.11.2",

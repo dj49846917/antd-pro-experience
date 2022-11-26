@@ -89,7 +89,7 @@ function MoreModal() {
 
   return (
     <Spin spinning={loading}>
-      <Card title={intl.formatMessage({ id: 'menu.template.modal.more-modal', defaultMessage: '多个子组件弹框' })} bordered>
+      <Card title={intl.formatMessage({ id: 'menu.modal.more-modal', defaultMessage: '多个子组件弹框' })} bordered>
         <Button type='primary' onClick={() => action("add")}>添加</Button>
         <Table
           dataSource={list}

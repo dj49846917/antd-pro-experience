@@ -23,7 +23,7 @@ function NormalModal() {
 
   return (
     <Spin spinning={loading}>
-      <Card title={intl.formatMessage({ id: 'menu.template.modal.normal-modal', defaultMessage: '子组件弹窗' })} bordered>
+      <Card title={intl.formatMessage({ id: 'menu.modal.normal-modal', defaultMessage: '子组件弹窗' })} bordered>
         <Button type="primary" onClick={() => setVisible(true)}>
           添加
         </Button>

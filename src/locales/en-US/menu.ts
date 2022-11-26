@@ -27,6 +27,7 @@ export default {
   'menu.bpmn': 'process',
   'menu.bpmn.base': 'process base',
   'menu.bpmn.viewer': 'process viewer',
+  'menu.bpmn.custompanel': 'custom panel',
   'menu.table': 'table',
   'menu.table.tableradio': 'tableradio',
   'menu.table.tablecheckbox': 'tablecheckbox',

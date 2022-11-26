@@ -77,7 +77,7 @@ function MoreChildModal() {
   return (
     <ModalContext.Provider value={{ state, dispatch }}>
       <Spin spinning={loading}>
-        <Card title={intl.formatMessage({ id: 'menu.template.modal.more-child-modal', defaultMessage: '弹窗在子页面和孙页面' })} bordered>
+        <Card title={intl.formatMessage({ id: 'menu.modal.more-child-modal', defaultMessage: '弹窗在子页面和孙页面' })} bordered>
           <Button type='primary' onClick={() => action("add")}>添加</Button>
           <Table
             dataSource={state.dataSource}

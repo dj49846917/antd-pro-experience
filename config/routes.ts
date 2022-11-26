@@ -217,10 +217,16 @@
         component: './template/bpmn/Base',
       },
       {
-        path: '/template/bpmn/Viewer',
+        path: '/template/bpmn/viewer',
         name: 'viewer',
         icon: 'smile',
         component: './template/bpmn/Viewer',
+      },
+      {
+        path: '/template/bpmn/custompanel',
+        name: 'custompanel',
+        icon: 'smile',
+        component: './template/bpmn/CustomPanel',
       }
     ]
   },
