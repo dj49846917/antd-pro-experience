@@ -34,6 +34,7 @@ function CustomPanel() {
         camunda: camundaModdleDescriptor,
       },
     });
+    setBpmnjsModeler(bpmnJSModeler)
     await bpmnJSModeler.createDiagram()
     window.bpmnInstance = {
       modeling: bpmnJSModeler.get('modeling'),
@@ -44,7 +45,7 @@ function CustomPanel() {
   }
 
   return (
-    <Process.Provider value={{ state, dispatch }}>
+    <Process.Provider value={{ state, dispatch, form, bpmnjsModeler }}>
       <div className={styles['bpmn-container']}>
         <div className={styles['bpmn-btn']}>
           <Button>导出XML</Button>

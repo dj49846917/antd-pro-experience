@@ -1,3 +1,5 @@
+import { CommonParamType } from "@/types"
+import { FormInstance } from "antd"
 import { createContext } from "react"
 
 export type ProcessAction = {
@@ -6,32 +8,36 @@ export type ProcessAction = {
 }
 
 export enum ActionType {
-  changeFiledVisible = "setFiledVisible",
+  changeCurrentElement = "setCurrentElement",
 }
 
 export type ProcessStateType = {
-  filedVisible: boolean,
+  currentElement: CommonParamType,
 }
 
 export const initialState: ProcessStateType = {
-  filedVisible: false,
+  currentElement: {},
 }
 
 type ProcessProps = {
   state: ProcessStateType,
-  dispatch: React.Dispatch<ProcessAction>
+  dispatch: React.Dispatch<ProcessAction>,
+  form: FormInstance<any>,
+  bpmnjsModeler: CommonParamType
 }
 
 export const Process = createContext<ProcessProps>({
   dispatch: () => { },
-  state: initialState
+  state: initialState,
+  form: null as any,
+  bpmnjsModeler: {}
 });
 
 export const reducer = (state: ProcessStateType, action: ProcessAction) => {
   switch (action.type) {
-    case ActionType.changeFiledVisible:
-      return { ...state, filedVisible: action.payload.filedVisible }
+    case ActionType.changeCurrentElement:
+      return { ...state, currentElement: action.payload.currentElement }
     default:
-      return { ...state, filedVisible: action.payload.filedVisible }
+      return { ...state, currentElement: action.payload.currentElement }
   }
 }
