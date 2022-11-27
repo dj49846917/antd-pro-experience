@@ -13,6 +13,8 @@ export default {
   'menu.modal.more-modal': '多个子组件弹框',
   'menu.modal.more-child-modal': '弹窗在子页面和孙页面',
   'menu.other': '其他',
+  'menu.other.water': '水印',
+  'menu.other.province': '省市区',
   'menu.other.export': '导出',
   'menu.other.export.datatoexcel': '数据转excel',
   'menu.other.export.stringtoexcel': '流转excel',

@@ -109,7 +109,6 @@ function CustomPanel() {
           <Button onClick={openFile}>导入xml</Button>
           <Button onClick={exportFile}>导出XML</Button>
           <Button onClick={save}>保存</Button>
-          <Button onClick={lookXML}>预览xml</Button>
           <input type="file" id="files" ref={uploadRef} style={{ display: 'none' }} accept=".xml, .bpmn" onChange={importLocalFile} />
         </div>
         <div className={styles['bpmn-main']}>

@@ -14,6 +14,8 @@ export default {
   'menu.modal.more-modal': 'more child component modal',
   'menu.modal.more-child-modal': 'modal in child and grandsun',
   'menu.other': 'other',
+  'menu.other.water': 'water marker',
+  'menu.other.province': 'province',
   'menu.other.turntopage': 'turn to page',
   'menu.other.targetpage': 'target page',
   'menu.other.upload': 'upload',

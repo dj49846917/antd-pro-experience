@@ -148,6 +148,18 @@
         component: './template/other/Layout',
       },
       {
+        path: '/template/other/water',
+        name: 'water',
+        icon: 'smile',
+        component: './template/other/WaterMarker',
+      },
+      {
+        path: '/template/other/province',
+        name: 'province',
+        icon: 'smile',
+        component: './template/other/Province',
+      },
+      {
         path: '/template/other/export',
         name: 'export',
         icon: 'smile',
