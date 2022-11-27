@@ -1,6 +1,6 @@
 import { utils } from '@/utils/utils'
 import { Form, Tabs } from 'antd'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, memo } from 'react'
 import { Tab } from 'rc-tabs/lib/interface'
 import { ActionType, Process } from '../Context'
 import { EventType } from '../types'
@@ -16,7 +16,7 @@ type Props = {}
 function Panel({ }: Props) {
   const { state, dispatch, form, bpmnjsModeler } = useContext(Process)
   const [tabInfo, setTabInfo] = useState<Tab[]>([])
-  const [activeTab, setActiveTab] = useState("0")
+  // const [activeTab, setActiveTab] = useState("0")
 
   useEffect(() => {
     if (!utils.isEmptyObject(bpmnjsModeler)) {
@@ -37,8 +37,7 @@ function Panel({ }: Props) {
   useEffect(() => {
     if (!utils.isEmptyObject(state.currentElement)) {
       const current = state.currentElement
-      console.log("current", current)
-      setActiveTab("0")
+      dispatch({ type: ActionType.changeActiveTab, payload: { ...state, activeTab: '0' } })
       if (current.type === EventType.PROCESS) {
         setTabInfo([{ key: '0', label: '基本信息' }])
       } else {
@@ -75,8 +74,8 @@ function Panel({ }: Props) {
       >
         <Tabs
           className={styles['bpmn-tabs']}
-          activeKey={activeTab}
-          onChange={(e) => setActiveTab(e)}
+          activeKey={state.activeTab}
+          onChange={(e) => dispatch({ type: ActionType.changeActiveTab, payload: { ...state, activeTab: e } })}
           size='small'
           items={tabInfo}
         />
@@ -86,4 +85,4 @@ function Panel({ }: Props) {
   )
 }
 
-export default Panel
+export default memo(Panel)

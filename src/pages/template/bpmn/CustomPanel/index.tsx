@@ -1,6 +1,6 @@
 import { CommonParamType } from '@/types'
 import { Button, Form } from 'antd'
-import { useEffect, useReducer, useRef, useState } from 'react'
+import { memo, useEffect, useReducer, useRef, useState } from 'react'
 
 import BpmnJSModeler from 'bpmn-js/lib/Modeler';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
@@ -50,7 +50,6 @@ function CustomPanel() {
         <div className={styles['bpmn-btn']}>
           <Button>导出XML</Button>
           <Button>保存</Button>
-          <Button>退出</Button>
         </div>
         <div className={styles['bpmn-main']}>
           <div className={styles['bpmn-modeler']} ref={containerRef}></div>
@@ -61,4 +60,4 @@ function CustomPanel() {
   )
 }
 
-export default CustomPanel
+export default memo(CustomPanel)

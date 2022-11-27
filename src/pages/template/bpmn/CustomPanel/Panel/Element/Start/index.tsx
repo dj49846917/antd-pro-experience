@@ -1,11 +1,22 @@
-import React from 'react'
+import { Collapse } from 'antd'
+import { memo, useContext } from 'react'
+import { Process } from '../../../Context'
+import CommonForm from '../CommonForm'
+import styles from '../index.less'
 
-type Props = {}
-
-function StartElement({ }: Props) {
+function StartElement() {
+  const { state } = useContext(Process)
   return (
-    <div>StartElement</div>
+    <>
+      {state.activeTab === '0' && (
+        <Collapse defaultActiveKey={['1']} className={styles.list}>
+          <Collapse.Panel header="节点信息" key="1">
+            <CommonForm />
+          </Collapse.Panel>
+        </Collapse>
+      )}
+    </>
   )
 }
 
-export default StartElement
+export default memo(StartElement)

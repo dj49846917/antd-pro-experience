@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 type Props = {}
 
@@ -8,4 +8,4 @@ function EndElement({ }: Props) {
   )
 }
 
-export default EndElement
+export default memo(EndElement)

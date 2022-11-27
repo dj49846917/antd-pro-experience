@@ -1,0 +1,110 @@
+@headerTitleBgColor: #F2F3F4;
+@paddingWidth: 0.83vw;
+@textColor2: #5A607F;
+@titleColor: #2F3236;
+@textSize2: 12px;
+@primary-color: #009a44;
+
+.list {
+  :global(.ant-collapse-item) {
+    :global(.ant-collapse-header) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 32px;
+      line-height: 32px !important;
+      background-color: @headerTitleBgColor;
+      padding: 0 @paddingWidth !important;
+      box-sizing: border-box;
+      font-size: @textSize2;
+      color: @titleColor;
+    }
+
+    :global(.ant-collapse-content) {
+      :global(.ant-collapse-content-box) {
+        padding: 12px 0 1px 0;
+
+        .list_item {
+          .list_item_content {
+            padding: 0 @paddingWidth;
+            box-sizing: border-box;
+
+            :global(.form-items) {
+              height: 130px;
+            }
+
+            .auth {
+              margin-top: 16px;
+              font-size: @textSize2;
+              color: @textColor2;
+            }
+
+            .authBtn {
+              margin: 7px 0;
+              font-size: @textSize2;
+            }
+
+            :global(.ant-row) {
+              margin-bottom: 0;
+
+              :global(label) {
+                font-size: @textSize2;
+                color: @textColor2;
+              }
+
+              :global(.form_item_setting) {
+                display: flex;
+              }
+
+              :global(.ant-input) {
+                font-size: @textSize2;
+              }
+
+              :global(.ant-select) {
+                font-size: @textSize2;
+              }
+
+              :global(.ant-form-item-explain-error) {
+                font-size: @textSize2;
+              }
+
+              :global(.ant-picker) {
+                width: 100%;
+                font-size: @textSize2;
+                color: @textColor2;
+              }
+
+              :global(.ant-picker input) {
+                font-size: @textSize2;
+                color: @textColor2;
+              }
+            }
+
+            :global(.inlineItem) {
+              :global(.ant-form-item-control-input-content) {
+                display: flex;
+              }
+            }
+
+            .condition_item {
+              display: flex;
+              align-items: flex-end;
+              margin-bottom: 6px;
+
+              .condition_icon {
+                font-size: 20px;
+                color: @primary-color;
+              }
+            }
+
+            :global(.ant-input-number) {
+              font-size: @textSize2;
+              color: @textColor2;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
