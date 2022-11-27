@@ -38,6 +38,10 @@ function Panel({ }: Props) {
     if (!utils.isEmptyObject(state.currentElement)) {
       const current = state.currentElement
       dispatch({ type: ActionType.changeActiveTab, payload: { ...state, activeTab: '0' } })
+      form.setFieldsValue({
+        id: current.businessObject.id,
+        name: current.businessObject.name || undefined
+      })
       if (current.type === EventType.PROCESS) {
         setTabInfo([{ key: '0', label: '基本信息' }])
       } else {

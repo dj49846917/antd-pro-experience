@@ -11,6 +11,41 @@ import styles from './index.less'
 import Panel from './Panel'
 import camundaModdleDescriptor from '../utils/camundaModdleDescriptor';
 
+// 导出xml
+export function exportProgressXml(obj: CommonParamType, type: string) {
+  obj.saveXML({ format: true }).then((result: { xml: any; }) => {
+    const { xml } = result;
+    download(type, xml);
+  }).catch((err: any) => {
+    console.log("err", err)
+  })
+}
+
+export const download = (type: string, data: string | number | boolean, name?: string) => {
+  let dataTrack = '';
+  const a = document.createElement('a');
+
+  switch (type) {
+    case 'xml':
+      dataTrack = 'bpmn';
+      break;
+    case 'svg':
+      dataTrack = 'svg';
+      break;
+    default:
+      break;
+  }
+
+  a.setAttribute('href', `data:application/bpmn20-xml;charset=UTF-8,${encodeURIComponent(data)}`);
+  a.setAttribute('target', '_blank');
+  a.setAttribute('dataTrack', `diagram:download-${dataTrack}`);
+  a.setAttribute('download', name || `diagram.${dataTrack}`);
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
+
 function CustomPanel() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const containerRef = useRef(null);
@@ -44,12 +79,23 @@ function CustomPanel() {
     }
   }
 
+  const exportFile = () => {
+    exportProgressXml(bpmnjsModeler, 'xml')
+  }
+
+  const save = async () => {
+    const result = await form.validateFields()
+    if (result) {
+
+    }
+  }
+
   return (
     <Process.Provider value={{ state, dispatch, form, bpmnjsModeler }}>
       <div className={styles['bpmn-container']}>
         <div className={styles['bpmn-btn']}>
-          <Button>导出XML</Button>
-          <Button>保存</Button>
+          <Button onClick={exportFile}>导出XML</Button>
+          <Button onClick={save}>保存</Button>
         </div>
         <div className={styles['bpmn-main']}>
           <div className={styles['bpmn-modeler']} ref={containerRef}></div>

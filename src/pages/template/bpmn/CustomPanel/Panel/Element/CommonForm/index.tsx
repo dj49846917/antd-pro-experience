@@ -1,10 +1,16 @@
 import { Form, Input } from 'antd'
-import { memo } from 'react'
+import React, { memo, useContext } from 'react'
+import { Process } from '../../../Context'
 import styles from '../index.less'
 
-type Props = {}
+function CommonForm() {
+  const { state } = useContext(Process)
+  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    window.bpmnInstance.modeling.updateProperties(state.currentElement, {
+      name: e.target.value || undefined
+    })
+  }
 
-function CommonForm({ }: Props) {
   return (
     <div className={styles.list_item}>
       <div className={styles.list_item_content}>
@@ -12,7 +18,7 @@ function CommonForm({ }: Props) {
           <Input placeholder='请输入节点Id' disabled />
         </Form.Item>
         <Form.Item name="name" label="节点名称" rules={[{ required: true }]}>
-          <Input placeholder='请输入节点名称' />
+          <Input placeholder='请输入节点名称' onChange={changeValue} />
         </Form.Item>
       </div>
     </div>
