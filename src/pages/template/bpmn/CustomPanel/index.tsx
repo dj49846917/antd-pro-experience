@@ -48,7 +48,8 @@ export const download = (type: string, data: string | number | boolean, name?: s
 
 function CustomPanel() {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const containerRef = useRef(null);
+  const containerRef = useRef<any>(null);
+  const uploadRef = useRef<any>(null)
   const [bpmnjsModeler, setBpmnjsModeler] = useState<CommonParamType>({});
   const [form] = Form.useForm()
 
@@ -82,20 +83,34 @@ function CustomPanel() {
   const exportFile = () => {
     exportProgressXml(bpmnjsModeler, 'xml')
   }
-
+  // 点击确定
   const save = async () => {
     const result = await form.validateFields()
-    if (result) {
+  }
+  // 点击导入xml
+  const openFile = () => {
+    uploadRef?.current?.click()
+  }
 
-    }
+  // 导入操作
+  const importLocalFile = () => {
+    const file = uploadRef?.current?.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function () {
+      bpmnjsModeler.importXML(this.result)
+    };
   }
 
   return (
     <Process.Provider value={{ state, dispatch, form, bpmnjsModeler }}>
       <div className={styles['bpmn-container']}>
         <div className={styles['bpmn-btn']}>
+          <Button onClick={openFile}>导入xml</Button>
           <Button onClick={exportFile}>导出XML</Button>
           <Button onClick={save}>保存</Button>
+          <Button onClick={lookXML}>预览xml</Button>
+          <input type="file" id="files" ref={uploadRef} style={{ display: 'none' }} accept=".xml, .bpmn" onChange={importLocalFile} />
         </div>
         <div className={styles['bpmn-main']}>
           <div className={styles['bpmn-modeler']} ref={containerRef}></div>
