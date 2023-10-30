@@ -1,24 +1,27 @@
-import { CommonParamType } from '@/types'
-import { Button, Form } from 'antd'
-import { memo, useEffect, useReducer, useRef, useState } from 'react'
+import { CommonParamType } from '@/types';
+import { Button, Form } from 'antd';
+import { memo, useEffect, useReducer, useRef, useState } from 'react';
 
 import BpmnJSModeler from 'bpmn-js/lib/Modeler';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 
-import customTranslate from '../utils/customTranslate/customTranslate'
-import { initialState, Process, reducer } from './Context'
-import styles from './index.less'
-import Panel from './Panel'
+import customTranslate from '../utils/customTranslate/customTranslate';
+import { initialState, Process, reducer } from './Context';
+import styles from './index.less';
+import Panel from './Panel';
 import camundaModdleDescriptor from '../utils/camundaModdleDescriptor';
 
 // 导出xml
 export function exportProgressXml(obj: CommonParamType, type: string) {
-  obj.saveXML({ format: true }).then((result: { xml: any; }) => {
-    const { xml } = result;
-    download(type, xml);
-  }).catch((err: any) => {
-    console.log("err", err)
-  })
+  obj
+    .saveXML({ format: true })
+    .then((result: { xml: any }) => {
+      const { xml } = result;
+      download(type, xml);
+    })
+    .catch((err: any) => {
+      console.log('err', err);
+    });
 }
 
 export const download = (type: string, data: string | number | boolean, name?: string) => {
@@ -47,50 +50,55 @@ export const download = (type: string, data: string | number | boolean, name?: s
 };
 
 function CustomPanel() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState);
   const containerRef = useRef<any>(null);
-  const uploadRef = useRef<any>(null)
+  const uploadRef = useRef<any>(null);
   const [bpmnjsModeler, setBpmnjsModeler] = useState<CommonParamType>({});
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   useEffect(() => {
-    initBpmn()
-  }, [])
+    initBpmn();
+  }, []);
 
   const initBpmn = async () => {
     const customTranslateModule = {
       translate: ['value', customTranslate],
     };
-    let bpmnJSModeler = new BpmnJSModeler({
-      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, customTranslateModule, {
-        zoomScroll: ["value", ''],
-      }],
+    const bpmnJSModeler = new BpmnJSModeler({
+      additionalModules: [
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+        customTranslateModule,
+        {
+          zoomScroll: ['value', ''],
+        },
+      ],
       container: containerRef.current,
       moddleExtensions: {
         camunda: camundaModdleDescriptor,
       },
     });
-    setBpmnjsModeler(bpmnJSModeler)
-    await bpmnJSModeler.createDiagram()
+    setBpmnjsModeler(bpmnJSModeler);
+    await bpmnJSModeler.createDiagram();
     window.bpmnInstance = {
       modeling: bpmnJSModeler.get('modeling'),
-      elementRegistry: bpmnJSModeler.get("elementRegistry"),
-      moddle: bpmnJSModeler.get("moddle"),
-      bpmnFactory: bpmnJSModeler.get("bpmnFactory")
-    }
-  }
+      elementRegistry: bpmnJSModeler.get('elementRegistry'),
+      moddle: bpmnJSModeler.get('moddle'),
+      bpmnFactory: bpmnJSModeler.get('bpmnFactory'),
+    };
+  };
 
   const exportFile = () => {
-    exportProgressXml(bpmnjsModeler, 'xml')
-  }
+    exportProgressXml(bpmnjsModeler, 'xml');
+  };
   // 点击确定
   const save = async () => {
-    const result = await form.validateFields()
-  }
+    const result = await form.validateFields();
+  };
   // 点击导入xml
   const openFile = () => {
-    uploadRef?.current?.click()
-  }
+    uploadRef?.current?.click();
+  };
 
   // 导入操作
   const importLocalFile = () => {
@@ -98,9 +106,9 @@ function CustomPanel() {
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function () {
-      bpmnjsModeler.importXML(this.result)
+      bpmnjsModeler.importXML(this.result);
     };
-  }
+  };
 
   return (
     <Process.Provider value={{ state, dispatch, form, bpmnjsModeler }}>
@@ -109,15 +117,22 @@ function CustomPanel() {
           <Button onClick={openFile}>导入xml</Button>
           <Button onClick={exportFile}>导出XML</Button>
           <Button onClick={save}>保存</Button>
-          <input type="file" id="files" ref={uploadRef} style={{ display: 'none' }} accept=".xml, .bpmn" onChange={importLocalFile} />
+          <input
+            type="file"
+            id="files"
+            ref={uploadRef}
+            style={{ display: 'none' }}
+            accept=".xml, .bpmn"
+            onChange={importLocalFile}
+          />
         </div>
         <div className={styles['bpmn-main']}>
-          <div className={styles['bpmn-modeler']} ref={containerRef}></div>
+          <div className={styles['bpmn-modeler']} ref={containerRef} />
           <Panel />
         </div>
       </div>
     </Process.Provider>
-  )
+  );
 }
 
-export default memo(CustomPanel)
+export default memo(CustomPanel);
